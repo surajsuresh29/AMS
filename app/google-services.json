@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "399554112426",
+    "firebase_url": "https://attendance-management-asas.firebaseio.com",
+    "project_id": "attendance-management-asas",
+    "storage_bucket": "attendance-management-asas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:399554112426:android:b666e81973aa6294",
+        "android_client_info": {
+          "package_name": "com.bosscorp.ams"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "399554112426-sb1p72ngaooej7bd86shkh3ss8v26v81.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bosscorp.ams",
+            "certificate_hash": "0cce95d1a3f0c7412b79be75570a39a4c2a1f489"
+          }
+        },
+        {
+          "client_id": "399554112426-ihthhukhc8ggke9bpb3hhfrvq6asc4s5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9cMBYyqf0rubAv4DLEbKjYyGBkNZe3R4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "399554112426-ihthhukhc8ggke9bpb3hhfrvq6asc4s5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

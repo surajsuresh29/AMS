@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AMS</string>
+    <string name="institute_name">AMRITA SCHOOL OF ARTS AND SCIENCES</string>
+    <string name="radio_student">I am a Student</string>
+    <string name="radio_faculty">I am a Faculty</string>
+    <string name="button_continue">CONTINUE</string>
+    <string name="faculty">Faculty</string>
+    <string name="student">Student</string>
+
+</resources>
