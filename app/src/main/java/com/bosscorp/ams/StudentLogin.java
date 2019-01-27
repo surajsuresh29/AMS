@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,30 +33,13 @@ public class StudentLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_login);
         db = FirebaseFirestore.getInstance();
-        Map<String, Object> newContact = new HashMap<>();
-        newContact.put(NAME_KEY, "John");
-        newContact.put(EMAIL_KEY, "john@gmail.com");
-        newContact.put(PHONE_KEY, "080-0808-009");
-        db.collection("PhoneBook").document("Contacts").set(newContact)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(StudentLogin.this, "User Registered",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(StudentLogin.this, "ERROR" + e.toString(),
-                                Toast.LENGTH_SHORT).show();
-                        Log.d("TAG", e.toString());
-                    }
-                });
-
-        //textDisplay = findViewById(R.id.textView3);
-        //addNewContact();
-        //ReadSingleContact();
+        textDisplay = findViewById(R.id.textView2);
+        Spinner dropdown = findViewById(R.id.course);
+        String[] items = new String[]{"Int MCA", "Int MA English", "Int MSc Maths"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter);
+        addNewContact();
+        ReadSingleContact();
     }
 
     private void addNewContact() {
