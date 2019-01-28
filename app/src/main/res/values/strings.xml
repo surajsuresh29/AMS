@@ -6,7 +6,8 @@
     <string name="button_continue">CONTINUE</string>
     <string name="faculty">Faculty</string>
     <string name="student">Student</string>
-    <string name="account_login">Account Login</string>
+    <string name="student_login">STUDENT LOGIN</string>
+    <string name="faculty_login">FACULTY LOGIN</string>
     <string name="user_name">User Name</string>
     <string name="password">Password</string>
     <string name="forgot_password">Forgot Password?</string>

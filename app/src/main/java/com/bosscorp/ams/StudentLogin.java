@@ -35,11 +35,11 @@ public class StudentLogin extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         textDisplay = findViewById(R.id.textView2);
         Spinner dropdown = findViewById(R.id.course);
-        String[] items = new String[]{"Int MCA", "Int MA English", "Int MSc Maths"};
+        String[] items = new String[]{"Int MCA 2015", "Int MCA 2016", "Int MCA 2017", "Int MCA 2018", "MCA LAT 2017", "MCA LAT 2018"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
-        addNewContact();
-        ReadSingleContact();
+        //addNewContact();
+        //ReadSingleContact();
     }
 
     private void addNewContact() {
