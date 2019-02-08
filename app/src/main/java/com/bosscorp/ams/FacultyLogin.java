@@ -50,7 +50,7 @@ public class FacultyLogin extends AppCompatActivity {
 
 
     public void Login(View view) {
-        DocumentReference docRef = db.collection("courses").document(String.valueOf(textDisplay1));
+        DocumentReference docRef = db.collection("teachers").document(String.valueOf(textDisplay1));
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
