@@ -30,7 +30,7 @@ public class StudentLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_login);
         db = FirebaseFirestore.getInstance();
-        username = findViewById(R.id.regno);
+        username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         login = findViewById(R.id.login);
         Spinner dropdown = findViewById(R.id.course);
