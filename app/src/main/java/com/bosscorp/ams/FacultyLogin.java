@@ -18,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class FacultyLogin extends AppCompatActivity {
 
     FirebaseFirestore db;
-    EditText textDisplay1, textDisplay2;
+    EditText username, password;
     Button login;
 
     @Override
@@ -26,19 +26,19 @@ public class FacultyLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculty_login);
         db = FirebaseFirestore.getInstance();
-        textDisplay1 = findViewById(R.id.username);
-        textDisplay2 = findViewById(R.id.password);
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
         login = findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(TextUtils.isEmpty(textDisplay1.getText()))
+                if(TextUtils.isEmpty(username.getText()))
                 {
-                    textDisplay1.setError("Please enter your User ID.");
+                    username.setError("Please enter your User ID.");
                 }
-                if(TextUtils.isEmpty(textDisplay2.getText()))
+                if(TextUtils.isEmpty(password.getText()))
                 {
-                    textDisplay2.setError("Please enter your Password.");
+                    password.setError("Please enter your Password.");
                 }
                 else{
                     Login(v);
@@ -50,7 +50,7 @@ public class FacultyLogin extends AppCompatActivity {
 
     
     public void Login(View view) {
-        DocumentReference docRef = db.collection("teachers").document(String.valueOf(textDisplay1.getText()));
+        DocumentReference docRef = db.collection("teachers").document(String.valueOf(username.getText()));
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -58,14 +58,14 @@ public class FacultyLogin extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document != null && document.exists()) {
                         String pass = String.valueOf(document.get("password"));
-                        if(pass.equals(String.valueOf(textDisplay2.getText())))
+                        if(pass.equals(String.valueOf(password.getText())))
                         {
                             Toast.makeText(FacultyLogin.this, "Successfully logged in.",
                                     Toast.LENGTH_LONG).show();
                         }
                     }
                     else {
-                        Toast.makeText(FacultyLogin.this, "No document found.",
+                        Toast.makeText(FacultyLogin.this, "Please check your login credentials.",
                                 Toast.LENGTH_LONG).show();
                     }
                 }

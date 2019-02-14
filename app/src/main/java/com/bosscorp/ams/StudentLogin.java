@@ -21,7 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;;
 public class StudentLogin extends AppCompatActivity {
 
     FirebaseFirestore db;
-    EditText textDisplay1, textDisplay2;
+    EditText username, password;
     Button login;
     String course;
 
@@ -30,8 +30,8 @@ public class StudentLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_login);
         db = FirebaseFirestore.getInstance();
-        textDisplay1 = findViewById(R.id.regno);
-        textDisplay2 = findViewById(R.id.password);
+        username = findViewById(R.id.regno);
+        password = findViewById(R.id.password);
         login = findViewById(R.id.login);
         Spinner dropdown = findViewById(R.id.course);
         String[] items = new String[]{"Int MCA 2015", "Int MCA 2016", "Int MCA 2017", "Int MCA 2018", "MCA LAT 2017", "MCA LAT 2018"};
@@ -52,13 +52,13 @@ public class StudentLogin extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(TextUtils.isEmpty(textDisplay1.getText()))
+                if(TextUtils.isEmpty(username.getText()))
                 {
-                    textDisplay1.setError("Please enter your Register No.");
+                    username.setError("Please enter your Register No.");
                 }
-                if(TextUtils.isEmpty(textDisplay2.getText()))
+                if(TextUtils.isEmpty(password.getText()))
                 {
-                    textDisplay2.setError("Please enter your Password.");
+                    password.setError("Please enter your Password.");
                 }
                 else{
                     Login(v);
@@ -71,10 +71,8 @@ public class StudentLogin extends AppCompatActivity {
 
 
     public void Login(View view) {
-        Toast.makeText(this, String.valueOf(textDisplay1.getText()), Toast.LENGTH_SHORT).show();
         DocumentReference docRef = db.collection("courses").document(String.valueOf(course))
-                .collection("students").document(String.valueOf(textDisplay1.getText()));
-        Toast.makeText(this, String.valueOf(docRef), Toast.LENGTH_SHORT).show();
+                .collection("students").document(String.valueOf(username.getText()));
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -82,14 +80,14 @@ public class StudentLogin extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document != null && document.exists()) {
                         String pass = String.valueOf(document.get("password"));
-                        if(pass.equals(String.valueOf(textDisplay2.getText())))
+                        if(pass.equals(String.valueOf(password.getText())))
                         {
                             Toast.makeText(StudentLogin.this, "Successfully logged in.",
                                     Toast.LENGTH_LONG).show();
                         }
                     }
                     else {
-                        Toast.makeText(StudentLogin.this, "No document found.",
+                        Toast.makeText(StudentLogin.this, "Please check your login credentials.",
                                 Toast.LENGTH_LONG).show();
                     }
                 }
