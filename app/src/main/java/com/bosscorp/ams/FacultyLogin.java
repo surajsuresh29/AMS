@@ -3,14 +3,13 @@ package com.bosscorp.ams;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -33,33 +32,48 @@ public class FacultyLogin extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Login(v);
+                if(TextUtils.isEmpty(textDisplay1.getText()))
+                {
+                    textDisplay1.setError("Please enter your User ID.");
+                }
+                if(TextUtils.isEmpty(textDisplay2.getText()))
+                {
+                    textDisplay2.setError("Please enter your Password.");
+                }
+                else{
+                    Login(v);
+                }
+
             }
         });
-
-       // Login();
-        Toast.makeText(FacultyLogin.this, "userid" + textDisplay2.getText().toString(),
-                Toast.LENGTH_LONG).show();
     }
 
     
     public void Login(View view) {
-        DocumentReference user = db.collection("teachers").document(textDisplay2.getText().toString());
-        user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        DocumentReference docRef = db.collection("teachers").document(String.valueOf(textDisplay1.getText()));
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task< DocumentSnapshot > task) {
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
-                    DocumentSnapshot doc = task.getResult();
-                    StringBuilder fields = new StringBuilder("");
-                    fields.append(doc.get("password"));
-                    textDisplay2.setText(fields.toString());
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null && document.exists()) {
+                        String pass = String.valueOf(document.get("password"));
+                        if(pass.equals(String.valueOf(textDisplay2.getText())))
+                        {
+                            Toast.makeText(FacultyLogin.this, "Successfully logged in.",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    else {
+                        Toast.makeText(FacultyLogin.this, "No document found.",
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+                else {
+                    Toast.makeText(FacultyLogin.this, "Document fetching failed.",
+                            Toast.LENGTH_LONG).show();
                 }
             }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                    }
-                });
+        });
     }
 }

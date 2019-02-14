@@ -76,9 +76,12 @@ public class StudentLogin extends AppCompatActivity {
     }
 
 
+
     public void Login(View view) {
+        Toast.makeText(this, String.valueOf(textDisplay1.getText()), Toast.LENGTH_SHORT).show();
         DocumentReference docRef = db.collection("courses").document(String.valueOf(course))
-                .collection("students").document(String.valueOf(textDisplay1));
+                .collection("students").document(String.valueOf(textDisplay1.getText()));
+        Toast.makeText(this, String.valueOf(docRef), Toast.LENGTH_SHORT).show();
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {

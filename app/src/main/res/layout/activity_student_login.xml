@@ -43,6 +43,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/username"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/user"
@@ -58,7 +59,7 @@
 
                 <Spinner
                     android:id="@+id/course"
-                    android:layout_width="310dp"
+                    android:layout_width="fill_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/spinner_bg"
@@ -71,13 +72,14 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/password"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:drawableStart="@drawable/lock"
                     android:drawableTint="@color/colorPrimary"
                     android:hint="@string/password"
-                    android:inputType="numberPassword"
+                    android:inputType="textPassword"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
@@ -90,6 +92,7 @@
 
 
             <Button
+                android:id="@+id/login"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="22dp"
@@ -110,14 +113,4 @@
         android:layout_marginTop="16dp"
         android:elevation="4dp"
         android:src="@drawable/student" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="143dp"
-        android:layout_height="84dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="133dp"
-        android:layout_marginBottom="161dp"
-        android:text="TextView" />
 </RelativeLayout>
