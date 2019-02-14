@@ -1,5 +1,6 @@
 package com.bosscorp.ams;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,7 +17,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;;
+import com.google.firebase.firestore.FirebaseFirestore;;import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class StudentLogin extends AppCompatActivity {
 
@@ -24,6 +27,7 @@ public class StudentLogin extends AppCompatActivity {
     EditText username, password;
     Button login;
     String course;
+    //String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +85,12 @@ public class StudentLogin extends AppCompatActivity {
                     if (document != null && document.exists()) {
                         String pass = String.valueOf(document.get("password"));
                         if(pass.equals(String.valueOf(password.getText())))
+
                         {
                             Toast.makeText(StudentLogin.this, "Successfully logged in.",
                                     Toast.LENGTH_LONG).show();
+                            Intent dash = new Intent(getApplicationContext(), StudentDashboard.class);
+                            startActivity(dash);
                         }
                     }
                     else {

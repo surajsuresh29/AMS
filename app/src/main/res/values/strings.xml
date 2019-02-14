@@ -13,5 +13,9 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="sign_in">Sign in</string>
     <string name="registration_number">Registration Number</string>
+    <string name="summry_button">ATTENDANCE SUMMARY</string>
+    <string name="coursewise_button">COURSEWISE REPORT</string>
+    <string name="request_leave">REQUEST LEAVE</string>
+    <string name="status_leave">CHECK STATUS</string>
 
 </resources>

@@ -18,10 +18,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChooseAccount"/>
-        <activity android:name=".StudentLogin"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".FacultyLogin"
+
+        <activity android:name=".ChooseAccount" />
+
+        <activity
+            android:name=".StudentLogin"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".FacultyLogin"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".FacultyDashboard" />
+
+        <activity
+            android:name=".StudentDashboard"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
