@@ -3,9 +3,12 @@
     <string name="institute_name">AMRITA SCHOOL OF ARTS AND SCIENCES</string>
     <string name="radio_student">I am a Student</string>
     <string name="radio_faculty">I am a Faculty</string>
+    <string name="radio_parent">I am a Parent</string>
     <string name="button_continue">CONTINUE</string>
     <string name="faculty">Faculty</string>
     <string name="student">Student</string>
+    <string name="parent">Parent</string>
+    <string name="parent_login">PARENT LOGIN</string>
     <string name="student_login">STUDENT LOGIN</string>
     <string name="faculty_login">FACULTY LOGIN</string>
     <string name="user_name">User Name</string>
