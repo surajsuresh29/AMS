@@ -31,6 +31,10 @@ public class SplashScreen extends AppCompatActivity {
                 {
                     StartMain=new Intent(getApplicationContext(),FacultyLogin.class);
                 }
+                else if((sp.getString("user","").equals("parent")))
+                {
+                    StartMain=new Intent(getApplicationContext(),ParentLogin.class);
+                }
                 startActivity(StartMain);
                 finish();
             }

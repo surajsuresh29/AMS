@@ -13,6 +13,7 @@ public class ChooseAccount extends AppCompatActivity {
 
     RadioButton student;
     RadioButton faculty;
+    RadioButton parent;
     Button Continue;
     SharedPreferences sp;
     @Override
@@ -21,6 +22,7 @@ public class ChooseAccount extends AppCompatActivity {
         setContentView(R.layout.choose_account);
         student = findViewById(R.id.radioStudent);
         faculty = findViewById(R.id.radioFaculty);
+        parent = findViewById(R.id.radioParent);
         Continue = findViewById(R.id.bt_continue);
         sp = getApplicationContext().getSharedPreferences("choice",MODE_PRIVATE);
         Continue.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +39,13 @@ public class ChooseAccount extends AppCompatActivity {
                 {
                     sp.edit().putString("user", "faculty").apply();
                     Intent StartMain=new Intent(getApplicationContext(),FacultyLogin.class);
+                    startActivity(StartMain);
+                    finish();
+                }
+                else if(parent.isChecked())
+                {
+                    sp.edit().putString("user", "parent").apply();
+                    Intent StartMain=new Intent(getApplicationContext(),ParentLogin.class);
                     startActivity(StartMain);
                     finish();
                 }
