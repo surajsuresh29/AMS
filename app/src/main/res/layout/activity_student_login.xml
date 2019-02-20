@@ -63,8 +63,11 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/spinner_bg"
+                    android:gravity="center"
                     android:spinnerMode="dropdown"
-                    android:singleLine="true" />
+                    style="@style/spinner_style"
+                    android:singleLine="true"
+                     />/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout

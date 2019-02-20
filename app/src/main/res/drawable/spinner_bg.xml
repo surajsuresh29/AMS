@@ -16,7 +16,9 @@
                     <corners android:radius="5dp" />
                 </shape>
             </item>
-
+            <item>
+                <bitmap android:gravity="center|right" android:src="@drawable/dropdown"/>
+            </item>
 
 
         </layer-list>
