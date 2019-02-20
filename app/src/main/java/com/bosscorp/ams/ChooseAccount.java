@@ -1,5 +1,7 @@
 package com.bosscorp.ams;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +18,7 @@ public class ChooseAccount extends AppCompatActivity {
     RadioButton parent;
     Button Continue;
     SharedPreferences sp;
+    AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,35 +27,92 @@ public class ChooseAccount extends AppCompatActivity {
         faculty = findViewById(R.id.radioFaculty);
         parent = findViewById(R.id.radioParent);
         Continue = findViewById(R.id.bt_continue);
+        builder = new AlertDialog.Builder(this);
         sp = getApplicationContext().getSharedPreferences("choice",MODE_PRIVATE);
         Continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if(student.isChecked())
                 {
-                    sp.edit().putString("user", "student").apply();
-                    Intent StartMain=new Intent(getApplicationContext(),StudentLogin.class);
-                    startActivity(StartMain);
-                    finish();
+
+                    builder.setMessage("This action cannot be reverted.\nPlease confirm your selection!\n\"STUDENT\"")
+                            .setCancelable(false)
+                            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    sp.edit().putString("user", "student").apply();
+                                    Intent StartMain=new Intent(getApplicationContext(),StudentLogin.class);
+                                    startActivity(StartMain);
+                                    finish();
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
                 }
                 else if(faculty.isChecked())
                 {
-                    sp.edit().putString("user", "faculty").apply();
-                    Intent StartMain=new Intent(getApplicationContext(),FacultyLogin.class);
-                    startActivity(StartMain);
-                    finish();
+
+                    builder.setMessage("This action cannot be reverted.\nPlease confirm your selection!\n\"FACULTY\"")
+                            .setCancelable(false)
+                            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    sp.edit().putString("user", "faculty").apply();
+                                    Intent StartMain=new Intent(getApplicationContext(),FacultyLogin.class);
+                                    startActivity(StartMain);
+                                    finish();
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
                 }
                 else if(parent.isChecked())
                 {
-                    sp.edit().putString("user", "parent").apply();
-                    Intent StartMain=new Intent(getApplicationContext(),ParentLogin.class);
-                    startActivity(StartMain);
-                    finish();
+
+                    builder.setMessage("This action cannot be reverted. \nPlease confirm your selection!\n\n\"PARENT\"")
+                            .setIcon(R.drawable.confirm_alert)
+                            .setCancelable(false)
+                            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    sp.edit().putString("user", "parent").apply();
+                                    Intent StartMain=new Intent(getApplicationContext(),ParentLogin.class);
+                                    startActivity(StartMain);
+                                    finish();
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
                 }
                 else
                 {
-                    sp.edit().putString("user", "").apply();
-                    Toast.makeText(ChooseAccount.this, "Please select an option", Toast.LENGTH_SHORT).show();
+
+
+                    builder.setMessage("Please choose an account to proceed.")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    sp.edit().putString("user", "").apply();
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
                 }
             }
         });
