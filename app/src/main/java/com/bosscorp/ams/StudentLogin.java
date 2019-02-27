@@ -65,7 +65,9 @@ public class StudentLogin extends AppCompatActivity {
                     password.setError("Please enter your Password.");
                 }
                 else{
-                    Login(v);
+                    //Login(v);
+                    Intent i = new Intent(getApplicationContext(),AttendanceList.class);
+                    startActivity(i);
                 }
 
             }
