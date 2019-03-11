@@ -1,28 +1,27 @@
 package com.bosscorp.ams;
+
 public class StudList {
+    String UserName;
+    String UserStatus;
 
-    String name,status;
-    public StudList()
-    {}
-
-    public StudList(String name, String status){
-        this.name =name;
-        this.status = status;
+    public StudList(String UserName,String UserStatus){
+        this.UserName = UserName;
+        this.UserStatus = UserStatus;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return UserName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        UserName = userName;
     }
 
-    public String getStatus() {
-        return status;
+    public String getUserStatus() {
+        return UserStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setUserStatus(String userStatus) {
+        UserStatus = userStatus;
     }
 }
