@@ -1,11 +1,17 @@
 package com.bosscorp.ams;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,22 +23,27 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;;import java.text.SimpleDateFormat;
+import com.google.firebase.firestore.FirebaseFirestore;
+;import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 public class StudentLogin extends AppCompatActivity {
-
     FirebaseFirestore db;
     EditText username, password;
     Button login;
     String course;
+    SharedPreferences pswd;
+    AlertDialog.Builder builder;
+
     //String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_login);
+        pswd=getApplicationContext().getSharedPreferences("password",MODE_PRIVATE);
+        builder = new AlertDialog.Builder(this);
         db = FirebaseFirestore.getInstance();
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
@@ -56,6 +67,7 @@ public class StudentLogin extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(TextUtils.isEmpty(username.getText()))
                 {
                     username.setError("Please enter your Register No.");
@@ -64,14 +76,49 @@ public class StudentLogin extends AppCompatActivity {
                 {
                     password.setError("Please enter your Password.");
                 }
-                else{
+                else if(pswd.getString("pswd","notchanged").equals("notchanged"))
+                {
+                   setPswd(v);
+                }
+
+                else if(pswd.getString("pswd","notchanged").equals("changed")){
                     Login(v);
                 }
 
             }
         });
     }
+    public void setPswd(View view)
+    {
+        builder.setMessage("Enter a new password");
+        View viewInflated = LayoutInflater.from(this).inflate(R.layout.password_popup, (ViewGroup) findViewById(R.id.content), false);
 
+        final EditText npswd=new EditText(this);
+
+        npswd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        builder.setView(npswd);
+        final EditText cpswd=new EditText(this);
+        cpswd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        builder.setView(cpswd);
+        builder.setCancelable(false)
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        pswd.edit().putString("pswd", "changed").apply();
+                        Intent StartMain=new Intent(getApplicationContext(),StudentDashboard.class);
+                        startActivity(StartMain);
+                        finish();
+                    }
+                });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 
 
     public void Login(View view) {
@@ -83,7 +130,9 @@ public class StudentLogin extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document != null && document.exists()) {
+
                         String pass = String.valueOf(document.get("password"));
+
                         if(pass.equals(String.valueOf(password.getText())))
 
                         {

@@ -52,10 +52,11 @@
                     android:inputType="textCapCharacters"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
-
             <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
 
                 <Spinner
                     android:id="@+id/course"
@@ -116,4 +117,7 @@
         android:layout_marginTop="16dp"
         android:elevation="4dp"
         android:src="@drawable/student" />
+
+
 </RelativeLayout>
+

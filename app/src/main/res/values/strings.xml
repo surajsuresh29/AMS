@@ -20,5 +20,7 @@
     <string name="coursewise_button">COURSEWISE REPORT</string>
     <string name="request_leave">REQUEST LEAVE</string>
     <string name="status_leave">CHECK STATUS</string>
+    <string name="hint_npassword">New Password</string>
+    <string name="hint_cpassword">Confirm Password</string>
 
 </resources>
