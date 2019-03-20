@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
-import android.widget.Toast;
 
 public class ChooseAccount extends AppCompatActivity {
 
@@ -38,12 +37,7 @@ public class ChooseAccount extends AppCompatActivity {
 
                     builder.setMessage("This action cannot be reverted.\nPlease confirm your selection!\n\"STUDENT\"")
                             .setCancelable(false)
-                            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            })
+                            .setNegativeButton("CANCEL", null)
                             .setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     sp.edit().putString("user", "student").apply();
@@ -60,12 +54,7 @@ public class ChooseAccount extends AppCompatActivity {
 
                     builder.setMessage("This action cannot be reverted.\nPlease confirm your selection!\n\"FACULTY\"")
                             .setCancelable(false)
-                            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            })
+                            .setNegativeButton("CANCEL", null)
                             .setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     sp.edit().putString("user", "faculty").apply();
@@ -83,12 +72,7 @@ public class ChooseAccount extends AppCompatActivity {
                     builder.setMessage("This action cannot be reverted. \nPlease confirm your selection!\n\n\"PARENT\"")
                             .setIcon(R.drawable.confirm_alert)
                             .setCancelable(false)
-                            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            })
+                            .setNegativeButton("CANCEL", null)
                             .setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     sp.edit().putString("user", "parent").apply();

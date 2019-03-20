@@ -22,10 +22,10 @@
     <string name="status_leave">CHECK STATUS</string>
     <string name="hint_npassword">New Password</string>
     <string name="hint_cpassword">Confirm Password</string>
-    <string name="add_attendance">MARK ATTENDANCE</string>
-
+    <string name="date">CHOOSE DATE</string>
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="add_attendance">Add attendance</string>
 
 </resources>

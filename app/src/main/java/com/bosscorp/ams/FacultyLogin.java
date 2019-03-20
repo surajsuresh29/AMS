@@ -42,6 +42,7 @@ public class FacultyLogin extends AppCompatActivity {
                     password.setError("Please enter your Password.");
                 }
                 else{
+                    login.setClickable(false);
                     Login(v);
                 }
 
