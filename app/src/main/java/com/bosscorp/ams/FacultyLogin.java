@@ -61,8 +61,11 @@ public class FacultyLogin extends AppCompatActivity {
                         String pass = String.valueOf(document.get("password"));
                         if(pass.equals(String.valueOf(password.getText())))
                         {
+                            Intent startdash = new Intent(getApplicationContext(),FacultyDashboard.class);
+                            startActivity(startdash);
                             Toast.makeText(FacultyLogin.this, "Successfully logged in.",
                                     Toast.LENGTH_LONG).show();
+                            finish();
                         }
                     }
                     else {

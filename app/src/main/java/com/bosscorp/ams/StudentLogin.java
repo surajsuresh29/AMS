@@ -91,6 +91,7 @@ public class StudentLogin extends AppCompatActivity {
                                     Toast.LENGTH_LONG).show();
                             Intent dash = new Intent(getApplicationContext(), StudentDashboard.class);
                             startActivity(dash);
+                            finish();
                         }
                     }
                     else {

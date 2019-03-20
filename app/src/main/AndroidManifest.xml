@@ -9,7 +9,8 @@
         android:roundIcon="@drawable/logoo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AttendanceList"></activity>
+        <activity android:name=".AddAttendance"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
