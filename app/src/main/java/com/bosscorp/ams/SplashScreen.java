@@ -9,6 +9,7 @@ import android.os.Bundle;
 public class SplashScreen extends AppCompatActivity {
 
     SharedPreferences sp;
+    SharedPreferences rm;
     Intent StartMain;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,25 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
                 sp = getApplicationContext().getSharedPreferences("choice",MODE_PRIVATE);
+                rm = getApplicationContext().getSharedPreferences("remember",MODE_PRIVATE);
+                if (rm.getString("rem","").equals("yes"))
+                {
+                    if((sp.getString("user","").equals("student")))
+                    {
+                        StartMain=new Intent(getApplicationContext(),StudentDashboard.class);
+                    }
+                    else if((sp.getString("user","").equals("faculty")))
+                    {
+                        StartMain=new Intent(getApplicationContext(),FacultyDashboard.class);
+                    }
+                    else if((sp.getString("user","").equals("parent")))
+                    {
+                        StartMain=new Intent(getApplicationContext(),ParentDashboard.class);
+                    }
+                    startActivity(StartMain);
+                    finish();
+                }
+
                 if(sp.getString("user","").equals(""))
                 {
                     StartMain =new Intent(getApplicationContext(),ChooseAccount.class);
@@ -38,6 +58,7 @@ public class SplashScreen extends AppCompatActivity {
                 startActivity(StartMain);
                 finish();
             }
+
         },4000);
     }
 }

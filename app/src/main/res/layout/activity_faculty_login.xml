@@ -67,17 +67,17 @@
                     android:drawableStart="@drawable/lock"
                     android:drawableTint="@color/colorPrimary"
                     android:hint="@string/password"
-                    android:inputType="textPassword"
-                    android:importantForAutofill="no" />
+                    android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
 
-            <TextView
+            <CheckBox
+                android:id="@+id/rememberme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:paddingTop="5dp"
-                android:text="@string/forgot_password" />
-
+                android:text="@string/remember_me"
+                android:textColor="@color/black_overlay"/>
 
             <Button
 
@@ -90,6 +90,15 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="5dp"
+                android:text="@string/forgot_password" />
+
+
         </LinearLayout>
     </RelativeLayout>
 

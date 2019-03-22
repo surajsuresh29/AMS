@@ -22,7 +22,8 @@ public class FacultyDashboard extends AppCompatActivity {
 
     boolean exit = false;
     Button addattendance;
-    String course;
+    String course,Date;
+    Integer start, end;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,16 +44,46 @@ public class FacultyDashboard extends AppCompatActivity {
 
             }
         });
+        Spinner hour1= findViewById(R.id.hour1);
+        Integer[] items1 = new Integer[]{0,1,2,3,4,5,6};
+        ArrayAdapter<Integer> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items1);
+        hour1.setAdapter(adapter1);
+        hour1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                start = (Integer) parent.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        Spinner hour2= findViewById(R.id.hour2);
+        Integer[] items2 = new Integer[]{0,1,2,3,4,5,6};
+        ArrayAdapter<Integer> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
+        hour2.setAdapter(adapter2);
+        hour2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                end = (Integer) parent.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         final Calendar myCalendar = Calendar.getInstance();
-
         final EditText edittext= (EditText) findViewById(R.id.Date);
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                // TODO Auto-generated method stub
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -60,6 +91,7 @@ public class FacultyDashboard extends AppCompatActivity {
                 String myFormat = "dd/MM/yy";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                 edittext.setText(sdf.format(myCalendar.getTime()));
+                Date = edittext.getText().toString();
             }
 
         };
@@ -80,6 +112,9 @@ public class FacultyDashboard extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(),AddAttendance.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("COURSE", course);
+                bundle.putString("DATE",Date);
+                bundle.putInt("Start",start);
+                bundle.putInt("End",end);
                 i.putExtras(bundle);
                 startActivity(i);
             }

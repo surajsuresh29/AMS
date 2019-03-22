@@ -83,12 +83,13 @@
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
-            <TextView
+            <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:paddingTop="5dp"
-                android:text="@string/forgot_password" />
+                android:text="@string/remember_me"
+                android:textColor="@color/black_overlay"/>
 
 
             <Button
@@ -101,6 +102,13 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="5dp"
+                android:text="@string/forgot_password" />
         </LinearLayout>
     </RelativeLayout>
 

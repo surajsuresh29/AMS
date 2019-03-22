@@ -1,12 +1,14 @@
 package com.bosscorp.ams;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,6 +23,8 @@ public class FacultyLogin extends AppCompatActivity {
     FirebaseFirestore db;
     EditText username, password;
     Button login;
+    CheckBox rem;
+    SharedPreferences rm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,8 @@ public class FacultyLogin extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         login = findViewById(R.id.login);
+        rem = findViewById(R.id.rememberme);
+        rm = getApplicationContext().getSharedPreferences("remember",MODE_PRIVATE);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,7 +48,10 @@ public class FacultyLogin extends AppCompatActivity {
                     password.setError("Please enter your Password.");
                 }
                 else{
-                    login.setClickable(false);
+                    if(rem.isChecked())
+                    {
+                        rm.edit().putString("rem", "yes").apply();
+                    }
                     Login(v);
                 }
 
