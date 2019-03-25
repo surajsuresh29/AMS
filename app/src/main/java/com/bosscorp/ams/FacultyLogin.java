@@ -47,12 +47,15 @@ public class FacultyLogin extends AppCompatActivity {
                 {
                     password.setError("Please enter your Password.");
                 }
-                else{
-                    if(rem.isChecked())
-                    {
+                else {
+                    if (rem.isChecked()) {
                         rm.edit().putString("rem", "yes").apply();
+                        //Toast.makeText(FacultyLogin.this, "Checked", Toast.LENGTH_SHORT).show();
+                        Login(v);
                     }
-                    Login(v);
+                    else {
+                        Login(v);
+                    }
                 }
 
             }

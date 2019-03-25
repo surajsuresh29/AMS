@@ -21,6 +21,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 sp = getApplicationContext().getSharedPreferences("choice",MODE_PRIVATE);
                 rm = getApplicationContext().getSharedPreferences("remember",MODE_PRIVATE);
+
                 if (rm.getString("rem","").equals("yes"))
                 {
                     if((sp.getString("user","").equals("student")))
@@ -35,11 +36,9 @@ public class SplashScreen extends AppCompatActivity {
                     {
                         StartMain=new Intent(getApplicationContext(),ParentDashboard.class);
                     }
-                    startActivity(StartMain);
-                    finish();
                 }
 
-                if(sp.getString("user","").equals(""))
+                else if(sp.getString("user","").equals(""))
                 {
                     StartMain =new Intent(getApplicationContext(),ChooseAccount.class);
                 }
