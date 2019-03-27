@@ -26,7 +26,6 @@
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="add_attendance">Add attendance</string>
     <string name="remember_me">Remember Me</string>
     <string name="to">TO</string>
     <string name="mark_attendance">MARK ATTENDANCE</string>
