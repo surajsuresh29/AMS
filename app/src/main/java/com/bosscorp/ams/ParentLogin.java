@@ -77,12 +77,9 @@ public class ParentLogin extends AppCompatActivity {
                     }
                     Login(v);
                 }
-
             }
         });
     }
-
-
 
     public void Login(View view) {
         DocumentReference docRef = db.collection("courses").document(String.valueOf(course))
@@ -95,7 +92,6 @@ public class ParentLogin extends AppCompatActivity {
                     if (document != null && document.exists()) {
                         String pass = String.valueOf(document.get("password"));
                         if(pass.equals(String.valueOf(password.getText())))
-
                         {
                             Toast.makeText(ParentLogin.this, "Successfully logged in.",
                                     Toast.LENGTH_LONG).show();
@@ -116,5 +112,4 @@ public class ParentLogin extends AppCompatActivity {
             }
         });
     }
-
 }

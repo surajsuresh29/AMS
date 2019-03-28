@@ -46,7 +46,7 @@ public class ChooseAttendanceDetails extends AppCompatActivity {
             }
         });
         Spinner hour1 = findViewById(R.id.hour1);
-        Integer[] items1 = new Integer[]{0, 1, 2, 3, 4, 5, 6};
+        Integer[] items1 = new Integer[]{1, 2, 3, 4, 5, 6};
         ArrayAdapter<Integer> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items1);
         hour1.setAdapter(adapter1);
         hour1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -62,7 +62,7 @@ public class ChooseAttendanceDetails extends AppCompatActivity {
         });
 
         Spinner hour2 = findViewById(R.id.hour2);
-        Integer[] items2 = new Integer[]{0, 1, 2, 3, 4, 5, 6};
+        Integer[] items2 = new Integer[]{1, 2, 3, 4, 5, 6};
         ArrayAdapter<Integer> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
         hour2.setAdapter(adapter2);
         hour2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

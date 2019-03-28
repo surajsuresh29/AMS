@@ -29,5 +29,10 @@
     <string name="remember_me">Remember Me</string>
     <string name="to">TO</string>
     <string name="mark_attendance">MARK ATTENDANCE</string>
+    <string name="add_daily_attendance">Add daily attendance of students</string>
+    <string name="leave_requests">VIEW LEAVE REQUESTS</string>
+    <string name="check_leave_requests_from_students">Check leave requests from students</string>
+    <string name="attendance_report">ATTENDANCE REPORT</string>
+    <string name="check_attendance_report">Check attendance report of students</string>
 
 </resources>

@@ -18,13 +18,15 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.w3c.dom.Text;
+
 public class FacultyLogin extends AppCompatActivity {
 
     FirebaseFirestore db;
     EditText username, password;
     Button login;
     CheckBox rem;
-    SharedPreferences rm;
+    SharedPreferences rm,tn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class FacultyLogin extends AppCompatActivity {
         login = findViewById(R.id.login);
         rem = findViewById(R.id.rememberme);
         rm = getApplicationContext().getSharedPreferences("remember",MODE_PRIVATE);
+        tn = getApplicationContext().getSharedPreferences("faculty",MODE_PRIVATE);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,10 +53,11 @@ public class FacultyLogin extends AppCompatActivity {
                 else {
                     if (rem.isChecked()) {
                         rm.edit().putString("rem", "yes").apply();
-                        //Toast.makeText(FacultyLogin.this, "Checked", Toast.LENGTH_SHORT).show();
+                        login.setClickable(false);
                         Login(v);
                     }
                     else {
+                        login.setClickable(false);
                         Login(v);
                     }
                 }
@@ -74,21 +78,22 @@ public class FacultyLogin extends AppCompatActivity {
                         String pass = String.valueOf(document.get("password"));
                         if(pass.equals(String.valueOf(password.getText())))
                         {
+                            tn.edit().putString("name", username.getText().toString()).apply();
                             Intent startdash = new Intent(getApplicationContext(),FacultyDashboard.class);
                             startActivity(startdash);
                             Toast.makeText(FacultyLogin.this, "Successfully logged in.",
-                                    Toast.LENGTH_LONG).show();
+                                    Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }
                     else {
                         Toast.makeText(FacultyLogin.this, "Please check your login credentials.",
-                                Toast.LENGTH_LONG).show();
+                                Toast.LENGTH_SHORT).show();
                     }
                 }
                 else {
                     Toast.makeText(FacultyLogin.this, "Document fetching failed.",
-                            Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
