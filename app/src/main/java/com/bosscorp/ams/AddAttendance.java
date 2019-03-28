@@ -1,11 +1,13 @@
 package com.bosscorp.ams;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,30 +38,20 @@ public class AddAttendance extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_attendance);
         parentLinearLayout = (LinearLayout)findViewById(R.id.parent_linear_layout);
-        if(course.equals("Int MCA 2015"))
+        switch (course)
         {
-            roll = "KH.SC.I5MCA1500";
-
-        }
-        else if(course.equals("Int MCA 2016"))
-        {
-            roll = "KH.SC.I5MCA1600";
-        }
-        else if(course.equals("Int MCA 2017"))
-        {
-            roll = "KH.SC.I5MCA1700";
-        }
-        else if(course.equals("Int MCA 2018"))
-        {
-            roll = "KH.SC.I5MCA1800";
-        }
-        else if(course.equals("MCA LAT 2017"))
-        {
-            roll = "KH.SC.LEMCA1700";
-        }
-        else if(course.equals("MCA LAT 2018"))
-        {
-            roll = "KH.SC.LEMCA1800";
+            case "Int MCA 2015":roll = "KH.SC.I5MCA150";
+            break;
+            case "Int MCA 2016":roll = "KH.SC.I5MCA160";
+            break;
+            case "Int MCA 2017":roll = "KH.SC.I5MCA170";
+            break;
+            case "Int MCA 2018":roll = "KH.SC.I5MCA180";
+            break;
+            case "MCA LAT 2017":roll = "KH.SC.LEMCA170";
+            break;
+            case "MCA LAT 2018":roll = "KH.SC.LEMCA180";
+            break;
         }
 
         //Toast.makeText(this, roll, Toast.LENGTH_SHORT).show();
@@ -67,40 +59,42 @@ public class AddAttendance extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 Integer studno  = Integer.valueOf(String.valueOf(snapshot.getValue()));
+                LinearLayout lm = (LinearLayout) findViewById(R.id.parent_linear_layout);
+
                 for(int i =1; i<studno+1; i++ )
                 {
-                    final LinearLayout lm = (LinearLayout) findViewById(R.id.parent_linear_layout);
-                    // create the layout params that will be used to define how your
-                    // button will be displayed
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-                    //Create four
-
-                        // Create LinearLayout
                         LinearLayout ll = new LinearLayout(getApplicationContext());
                         ll.setOrientation(LinearLayout.HORIZONTAL);
-
                         // Create TextView
                         TextView rollno = new TextView(getApplicationContext());
-                        rollno.setText(roll+i);
-                        rollno.setPadding(200,100,0,0);
+                        if(i==1||i==2||i==3||i==4||i==5||i==6||i==7||i==8||i==9)
+                        {
+                            rollno.setText(roll+0+i);
+                        }
+                        else {
+                            rollno.setText(roll+i);
+                        }
+                        rollno.setPadding(200,75,0,0);
                         rollno.setTextSize(20);
                         ll.addView(rollno);
 
                         // Create Switch
                         Switch aSwitch = new Switch(getApplicationContext());
-                        aSwitch.setPadding(225,100,0,0);
+                        aSwitch.setPadding(225,75,0,0);
                         aSwitch.setChecked(true);
                         ll.addView(aSwitch);
-
-                        //Add button to LinearLayout defined in XML
                         lm.addView(ll);
-                    }
-                    /*LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    final View rowView = inflater.inflate(R.layout.field, null);
-                    parentLinearLayout.addView(rowView, parentLinearLayout.getChildCount() - 1);
-                */
+                }
+                LinearLayout ln = new LinearLayout(getApplicationContext());
+                ln.setGravity(50);
+                ln.setPadding(0,75,0,0);
+                Button submit = new Button(getApplicationContext());
+                submit.setText(R.string.mark_attendance);
+                submit.setLayoutParams (new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                submit.setBackgroundColor(getColor(R.color.colorPrimary));
+                submit.setTextColor(getColor(R.color.white));
+                ln.addView(submit);
+                lm.addView(ln);
                 }
 
             @Override
