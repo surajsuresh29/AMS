@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -23,7 +24,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class AddAttendance extends AppCompatActivity {
 
     FirebaseFirestore db;
-    String course, roll, name,batch;
+    String course, roll, name,batch,rno;
+    Integer i,studno;
     ProgressDialog prg;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     SharedPreferences tn;
@@ -39,14 +41,14 @@ public class AddAttendance extends AppCompatActivity {
         prg = new ProgressDialog(AddAttendance.this);
         prg.setMessage("TAKE A DEEP BREATH..!!");
         prg.show();
-        final DatabaseReference dbref = database.getReference(batch);
-        final DatabaseReference usref = dbref.child("studno");
+        final DatabaseReference dbref = database.getReference("Strength");
+        final DatabaseReference usref = dbref.child(batch).child("studno");
         final Button submit = new Button(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_attendance);
         switch (batch)
         {
-            case "Int MCA 2015":roll = "KH.SC.I5MCA150";
+            case "Int MCA 2015":roll = "KH SC I5MCA150";
             switch (name)
             {
                 case "mahesh" : course = "Data Mining";
@@ -69,7 +71,7 @@ public class AddAttendance extends AppCompatActivity {
                     alert.show();
             }
             break;
-            case "Int MCA 2016":roll = "KH.SC.I5MCA160";
+            case "Int MCA 2016":roll = "KH SC I5MCA160";
             switch (name)
             {
                 case "leena" : course = "Computer Graphics";
@@ -92,7 +94,7 @@ public class AddAttendance extends AppCompatActivity {
                     alert.show();
             }
             break;
-            case "Int MCA 2017":roll = "KH.SC.I5MCA170";
+            case "Int MCA 2017":roll = "KH SC I5MCA170";
                 switch (name)
                 {
                     case "nandakumar" : course = "Data Structures";
@@ -115,7 +117,7 @@ public class AddAttendance extends AppCompatActivity {
                         alert.show();
                 }
             break;
-            case "Int MCA 2018":roll = "KH.SC.I5MCA180";
+            case "Int MCA 2018":roll = "KH SC I5MCA180";
                 switch (name)
                 {
                     case "prasannakumar" : course = "COSA";
@@ -138,7 +140,7 @@ public class AddAttendance extends AppCompatActivity {
                         alert.show();
                 }
             break;
-            case "MCA LAT 2017":roll = "KH.SC.LEMCA170";
+            case "MCA LAT 2017":roll = "KH SC LEMCA170";
                 switch (name)
                 {
                     case "anisha" : course = "JAVA";
@@ -161,7 +163,7 @@ public class AddAttendance extends AppCompatActivity {
                         alert.show();
                 }
             break;
-            case "MCA LAT 2018":roll = "KH.SC.LEMCA180";
+            case "MCA LAT 2018":roll = "KH SC LEMCA180";
                 switch (name)
                 {
                     case "ambily" : course = "Computer Graphics";
@@ -188,10 +190,10 @@ public class AddAttendance extends AppCompatActivity {
         usref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                Integer studno  = Integer.valueOf(String.valueOf(snapshot.getValue()));
+                studno  = Integer.valueOf(String.valueOf(snapshot.getValue()));
                 LinearLayout lm = (LinearLayout) findViewById(R.id.parent_linear_layout);
 
-                for(int i =1; i<studno+1; i++ )
+                for(i  =1; i<studno+1; i++ )
                 {
                         LinearLayout ll = new LinearLayout(getApplicationContext());
                         ll.setOrientation(LinearLayout.HORIZONTAL);
@@ -205,6 +207,7 @@ public class AddAttendance extends AppCompatActivity {
                             rollno.setText(roll+i);
                         }
                         rollno.setPadding(50,70,0,0);
+                        rollno.setId(i);
                         rollno.setTextColor(getColor(R.color.colorPrimary));
                         rollno.setTextSize(20);
                         ll.addView(rollno);
@@ -233,7 +236,26 @@ public class AddAttendance extends AppCompatActivity {
                 Toast.makeText(AddAttendance.this, "Database Error!", Toast.LENGTH_SHORT).show();
             }
         });
-        //DocumentReference docRef = db.collection("courses").document();
-        }
+        //DocumentReference docRef = db.collection("courses").document()
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(i= 0; i<studno+1;i++)
+                {
+                    if(i==1||i==2||i==3||i==4||i==5||i==6||i==7||i==8||i==9)
+                    {
+                        rno = (roll+0+i);
+                        Toast.makeText(AddAttendance.this, rno, Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        rno = (roll+i);
+                        Toast.makeText(AddAttendance.this, rno, Toast.LENGTH_SHORT).show();
+                    }
+                    DatabaseReference atref = database.getReference("Attendance");
+                    atref.child(batch).child(rno).child("status").setValue(1);
+                }
+            }
+        });
+    }
 }
 
