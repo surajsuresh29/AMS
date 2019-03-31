@@ -34,5 +34,16 @@
     <string name="check_leave_requests_from_students">Check leave requests from students</string>
     <string name="attendance_report">ATTENDANCE REPORT</string>
     <string name="check_attendance_report">Check attendance report of students</string>
+    <string name="add_student">ADD STUDENT</string>
+    <string name="add_stud_description">Add a new student to the class</string>
+    <string name="reg_no">Reg. No :</string>
+    <string name="name">Name :</string>
+    <string name="contact_no">Contact No :</string>
+    <string name="textview">TextView</string>
+    <string name="course">Course :</string>
+    <string name="add">ADD STUDENT</string>
+    <string name="register_no">REGISTER No.</string>
+    <string name="name_hint">NAME</string>
+    <string name="parent_s">PARENT\'S CONTACT</string>
 
 </resources>

@@ -34,7 +34,7 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="@drawable/circlebackground"
-                    android:src="@drawable/ic_group_add_white_24dp"
+                    android:src="@drawable/ic_insert_drive_file_black_24dp"
                     android:padding="10dp"/>
 
                 <TextView
@@ -66,6 +66,7 @@
             android:layout_margin="10dp"
             android:focusable="true">
             <LinearLayout
+                android:id="@+id/add_student"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -74,14 +75,14 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="@drawable/circlebackground"
-                    android:src="@drawable/ic_insert_drive_file_black_24dp"
+                    android:src="@drawable/ic_group_add_white_24dp"
                     android:padding="10dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"
-                    android:text="@string/leave_requests"/>
+                    android:text="@string/add_student"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -91,7 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/check_leave_requests_from_students"
+                    android:text="@string/add_stud_description"
                     android:padding="5dp"
                     android:textColor="@android:color/darker_gray"/>
 
@@ -113,7 +114,7 @@
             android:layout_margin="10dp"
             android:focusable="true">
             <LinearLayout
-
+                android:id="@+id/view_report"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
