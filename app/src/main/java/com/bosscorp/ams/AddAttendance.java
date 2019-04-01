@@ -46,7 +46,7 @@ public class AddAttendance extends AppCompatActivity {
         final Button submit = new Button(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_attendance);
-        switch (batch)
+      /*  switch (batch)
         {
             case "Int MCA 2015":roll = "KH SC I5MCA150";
             switch (name)
@@ -256,6 +256,6 @@ public class AddAttendance extends AppCompatActivity {
                 }
             }
         });
-    }
+*/    }
 }
 

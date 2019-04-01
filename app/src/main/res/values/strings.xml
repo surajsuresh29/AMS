@@ -42,8 +42,8 @@
     <string name="textview">TextView</string>
     <string name="course">Course :</string>
     <string name="add">ADD STUDENT</string>
-    <string name="register_no">REGISTER No.</string>
-    <string name="name_hint">NAME</string>
-    <string name="parent_s">PARENT\'S CONTACT</string>
+    <string name="register_no">REGISTER NUMBER.</string>
+    <string name="name_hint">STUDENT\'S NAME</string>
+    <string name="parent_s">PARENT\'S CONTACT No.</string>
 
 </resources>

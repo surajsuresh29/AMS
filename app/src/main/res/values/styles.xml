@@ -13,6 +13,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="MySwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
+
+
     <style name="spinner_style">
         <item name="android:background">@drawable/spinner_bg</item>
         <item name="android:layout_marginLeft">5dp</item>
