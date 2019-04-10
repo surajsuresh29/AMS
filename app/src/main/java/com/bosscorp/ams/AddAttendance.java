@@ -23,16 +23,19 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AddAttendance extends AppCompatActivity {
 
-    FirebaseFirestore db;
+  /*  FirebaseFirestore db;
     String course, roll, name,batch,rno;
     Integer i,studno;
     ProgressDialog prg;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     SharedPreferences tn;
     AlertDialog.Builder builder;
+    TextView t1 =  findViewById(R.id.t1);*/
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Bundle bundle=getIntent().getExtras();
+       /* Bundle bundle=getIntent().getExtras();
         batch =bundle.getString("COURSE");
         tn = getApplicationContext().getSharedPreferences("faculty",MODE_PRIVATE);
         builder = new AlertDialog.Builder(this);
@@ -44,8 +47,21 @@ public class AddAttendance extends AppCompatActivity {
         final DatabaseReference dbref = database.getReference("Strength");
         final DatabaseReference usref = dbref.child(batch).child("studno");
         final Button submit = new Button(getApplicationContext());
+        */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_attendance);
+
+        for (int i = 1; i < 21; i++)
+        {
+            String name = "t"+i;
+            int id = getResources().getIdentifier(name, "id", getPackageName());
+            if (id != 0)
+            {
+                TextView textView = (TextView) findViewById(id);
+                textView.setText("");
+            }
+        }
+
       /*  switch (batch)
         {
             case "Int MCA 2015":roll = "KH SC I5MCA150";
@@ -256,6 +272,7 @@ public class AddAttendance extends AppCompatActivity {
                 }
             }
         });
-*/    }
+*/
+    }
 }
 
