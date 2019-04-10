@@ -6,7 +6,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -23,45 +25,85 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AddAttendance extends AppCompatActivity {
 
-  /*  FirebaseFirestore db;
+
     String course, roll, name,batch,rno;
     Integer i,studno;
     ProgressDialog prg;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     SharedPreferences tn;
     AlertDialog.Builder builder;
-    TextView t1 =  findViewById(R.id.t1);*/
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-       /* Bundle bundle=getIntent().getExtras();
+        Bundle bundle=getIntent().getExtras();
         batch =bundle.getString("COURSE");
-        tn = getApplicationContext().getSharedPreferences("faculty",MODE_PRIVATE);
-        builder = new AlertDialog.Builder(this);
-        name = tn.getString("name","");
-        db = FirebaseFirestore.getInstance();
         prg = new ProgressDialog(AddAttendance.this);
         prg.setMessage("TAKE A DEEP BREATH..!!");
-        prg.show();
-        final DatabaseReference dbref = database.getReference("Strength");
-        final DatabaseReference usref = dbref.child(batch).child("studno");
-        final Button submit = new Button(getApplicationContext());
-        */
+        /*
+        builder = new AlertDialog.Builder(this);
+        tn = getApplicationContext().getSharedPreferences("faculty",MODE_PRIVATE);
+        name = tn.getString("name","");*/
+        final DatabaseReference usref = database.getReference().child("Student").child(batch);
+        final DatabaseReference dbref = usref.child("studno");
         super.onCreate(savedInstanceState);
+        prg.show();
         setContentView(R.layout.activity_add_attendance);
 
-        for (int i = 1; i < 21; i++)
-        {
-            String name = "t"+i;
-            int id = getResources().getIdentifier(name, "id", getPackageName());
-            if (id != 0)
-            {
-                TextView textView = (TextView) findViewById(id);
-                textView.setText("");
+       /* dbref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                studno = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
             }
-        }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        usref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (int i = 1; i < studno+1; i++)
+                {
+                    String name = "t"+i;
+                    String sname = "s"+i;
+                    int sid = getResources().getIdentifier(sname, "id", getPackageName());
+                    int id = getResources().getIdentifier(name, "id", getPackageName());
+                    if (id != 0)
+                    {
+                        TextView textView = (TextView) findViewById(id);
+                        Switch aswitch = (Switch) findViewById(sid);
+                        aswitch.setVisibility(View.VISIBLE);
+                        textView.setText("KH SC I5MCA16053");
+                        textView.setVisibility(View.VISIBLE);
+                    }
+                }
+                prg.hide();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+*/
+       /* usref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
+                {
+                    String sq = dataSnapshot1.getKey();
+                    Toast.makeText(AddAttendance.this, sq, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+*/
       /*  switch (batch)
         {
             case "Int MCA 2015":roll = "KH SC I5MCA150";
