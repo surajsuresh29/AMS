@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -26,68 +27,205 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class AddAttendance extends AppCompatActivity {
 
 
-    String course, roll, name,batch,rno;
-    Integer i,studno;
+    String course, roll, name, batch;
+    Integer rno;
     ProgressDialog prg;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
     SharedPreferences tn;
     AlertDialog.Builder builder;
+    Button submitbtn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Bundle bundle=getIntent().getExtras();
-        batch =bundle.getString("COURSE");
+        Bundle bundle = getIntent().getExtras();
+        batch = bundle.getString("COURSE");
+       // submitbtn = findViewById(R.id.submit);
         prg = new ProgressDialog(AddAttendance.this);
         prg.setMessage("TAKE A DEEP BREATH..!!");
-        /*
         builder = new AlertDialog.Builder(this);
-        tn = getApplicationContext().getSharedPreferences("faculty",MODE_PRIVATE);
-        name = tn.getString("name","");*/
-        final DatabaseReference usref = database.getReference().child("Student").child(batch);
-        final DatabaseReference dbref = usref.child("studno");
+        tn = getApplicationContext().getSharedPreferences("faculty", MODE_PRIVATE);
+        name = tn.getString("name", "");
         super.onCreate(savedInstanceState);
-        prg.show();
         setContentView(R.layout.activity_add_attendance);
-
-       /* dbref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                studno = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        usref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (int i = 1; i < studno+1; i++)
-                {
-                    String name = "t"+i;
-                    String sname = "s"+i;
-                    int sid = getResources().getIdentifier(sname, "id", getPackageName());
-                    int id = getResources().getIdentifier(name, "id", getPackageName());
-                    if (id != 0)
-                    {
-                        TextView textView = (TextView) findViewById(id);
-                        Switch aswitch = (Switch) findViewById(sid);
-                        aswitch.setVisibility(View.VISIBLE);
-                        textView.setText("KH SC I5MCA16053");
-                        textView.setVisibility(View.VISIBLE);
-                    }
+        prg.show();
+        switch (batch) {
+            case "Int MCA 2015":
+                roll = "KHSCI5MCA";
+                rno = 15000;
+                switch (name) {
+                    case "mahesh":
+                        course = "Data Mining";
+                        break;
+                    case "hari":
+                        course = "Web Designing";
+                        break;
+                    case "nima":
+                        course = "Cryptography";
+                        break;
+                    default:
+                        builder.setMessage("PLEASE SELECT A BATCH WHERE YOU TEACH.")
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        Intent StartMain = new Intent(getApplicationContext(), ChooseAttendanceDetails.class);
+                                        startActivity(StartMain);
+                                        finish();
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
                 }
-                prg.hide();
+                break;
+            case "Int MCA 2016":
+                roll = "KHSCI5MCA";
+                rno = 16000;
+                switch (name) {
+                    case "leena":
+                        course = "Computer Graphics";
+                        break;
+                    case "deepa":
+                        course = "Soft Computing";
+                        break;
+                    case "soumya":
+                        course = "Artificial Intelligence";
+                        break;
+                    default:
+                        builder.setMessage("PLEASE SELECT A BATCH WHERE YOU TEACH.")
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        Intent StartMain = new Intent(getApplicationContext(), ChooseAttendanceDetails.class);
+                                        startActivity(StartMain);
+                                        finish();
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                }
+                break;
+            case "Int MCA 2017":
+                roll = "KHSCI5MCA";
+                rno = 17000;
+                switch (name) {
+                    case "nandakumar":
+                        course = "Data Structures";
+                        break;
+                    case "rajalakshmi":
+                        course = "DBMS";
+                        break;
+                    case "sreekumar":
+                        course = "Network Security";
+                        break;
+                    default:
+                        builder.setMessage("PLEASE SELECT A BATCH WHERE YOU TEACH.")
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        Intent StartMain = new Intent(getApplicationContext(), ChooseAttendanceDetails.class);
+                                        startActivity(StartMain);
+                                        finish();
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                }
+                break;
+            case "Int MCA 2018":
+                roll = "KHSCI5MCA";
+                rno = 18000;
+                switch (name) {
+                    case "prasannakumar":
+                        course = "COSA";
+                        break;
+                    case "uma":
+                        course = "Software Engineering";
+                        break;
+                    case "vimina":
+                        course = "Machine Learning";
+                        break;
+                    default:
+                        builder.setMessage("PLEASE SELECT A BATCH WHERE YOU TEACH.")
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        Intent StartMain = new Intent(getApplicationContext(), ChooseAttendanceDetails.class);
+                                        startActivity(StartMain);
+                                        finish();
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                }
+                break;
+            case "MCA LAT 2017":
+                roll = "KHSCLEMCA";
+                rno = 17000;
+                switch (name) {
+                    case "anisha":
+                        course = "JAVA";
+                        break;
+                    case "ambily":
+                        course = "Networks";
+                        break;
+                    case "maya":
+                        course = "Discrete Mathematics";
+                        break;
+                    default:
+                        builder.setMessage("PLEASE SELECT A BATCH WHERE YOU TEACH.")
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        Intent StartMain = new Intent(getApplicationContext(), ChooseAttendanceDetails.class);
+                                        startActivity(StartMain);
+                                        finish();
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                }
+                break;
+            case "MCA LAT 2018":
+                roll = "KHSCLEMCA";
+                rno = 18000;
+                switch (name) {
+                    case "ambily":
+                        course = "Computer Graphics";
+                        break;
+                    case "deepa":
+                        course = "Soft Computing";
+                        break;
+                    case "soumya":
+                        course = "Artificial Intelligence";
+                        break;
+                    default:
+                        builder.setMessage("PLEASE CHOOSE A BATCH WHERE YOU TEACH.")
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        Intent StartMain = new Intent(getApplicationContext(), ChooseAttendanceDetails.class);
+                                        startActivity(StartMain);
+                                        finish();
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                }
+                break;
+        }
+        prg.hide();
+        for (int i = 1; i < 15; i++) {
+            String name = "t" + i;
+            String sname = "s" + i;
+            int sid = getResources().getIdentifier(sname, "id", getPackageName());
+            int id = getResources().getIdentifier(name, "id", getPackageName());
+            if (id != 0) {
+                TextView textView = (TextView) findViewById(id);
+                Switch aswitch = (Switch) findViewById(sid);
+                aswitch.setVisibility(View.VISIBLE);
+                textView.setText(roll + (rno + i));
+                textView.setVisibility(View.VISIBLE);
             }
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-*/
        /* usref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -104,147 +242,8 @@ public class AddAttendance extends AppCompatActivity {
             }
         });
 */
-      /*  switch (batch)
-        {
-            case "Int MCA 2015":roll = "KH SC I5MCA150";
-            switch (name)
-            {
-                case "mahesh" : course = "Data Mining";
-                break;
-                case "hari" : course = "Web Designing";
-                break;
-                case "nima" : course = "Cryptography";
-                break;
-                default :
-                    builder.setMessage("PLEASE SELECT A BATCH WHERE YOU TEACH.")
-                            .setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    Intent StartMain=new Intent(getApplicationContext(),ChooseAttendanceDetails.class);
-                                    startActivity(StartMain);
-                                    finish();
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-            }
-            break;
-            case "Int MCA 2016":roll = "KH SC I5MCA160";
-            switch (name)
-            {
-                case "leena" : course = "Computer Graphics";
-                break;
-                case "deepa" : course = "Soft Computing";
-                break;
-                case "soumya" : course = "Artificial Intelligence";
-                break;
-                default :
-                    builder.setMessage("PLEASE SELECT A BATCH WHERE YOU TEACH.")
-                            .setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    Intent StartMain=new Intent(getApplicationContext(),ChooseAttendanceDetails.class);
-                                    startActivity(StartMain);
-                                    finish();
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-            }
-            break;
-            case "Int MCA 2017":roll = "KH SC I5MCA170";
-                switch (name)
-                {
-                    case "nandakumar" : course = "Data Structures";
-                        break;
-                    case "rajalakshmi" : course = "DBMS";
-                        break;
-                    case "sreekumar" : course = "Network Security";
-                        break;
-                    default :
-                        builder.setMessage("PLEASE SELECT A BATCH WHERE YOU TEACH.")
-                                .setCancelable(false)
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        Intent StartMain=new Intent(getApplicationContext(),ChooseAttendanceDetails.class);
-                                        startActivity(StartMain);
-                                        finish();
-                                    }
-                                });
-                        AlertDialog alert = builder.create();
-                        alert.show();
-                }
-            break;
-            case "Int MCA 2018":roll = "KH SC I5MCA180";
-                switch (name)
-                {
-                    case "prasannakumar" : course = "COSA";
-                        break;
-                    case "uma" : course = "Software Engineering";
-                        break;
-                    case "vimina" : course = "Machine Learning";
-                        break;
-                    default :
-                        builder.setMessage("PLEASE SELECT A BATCH WHERE YOU TEACH.")
-                                .setCancelable(false)
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        Intent StartMain=new Intent(getApplicationContext(),ChooseAttendanceDetails.class);
-                                        startActivity(StartMain);
-                                        finish();
-                                    }
-                                });
-                        AlertDialog alert = builder.create();
-                        alert.show();
-                }
-            break;
-            case "MCA LAT 2017":roll = "KH SC LEMCA170";
-                switch (name)
-                {
-                    case "anisha" : course = "JAVA";
-                        break;
-                    case "ambily" : course = "Networks";
-                        break;
-                    case "maya" : course = "Discrete Mathematics";
-                        break;
-                    default :
-                        builder.setMessage("PLEASE SELECT A BATCH WHERE YOU TEACH.")
-                                .setCancelable(false)
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        Intent StartMain=new Intent(getApplicationContext(),ChooseAttendanceDetails.class);
-                                        startActivity(StartMain);
-                                        finish();
-                                    }
-                                });
-                        AlertDialog alert = builder.create();
-                        alert.show();
-                }
-            break;
-            case "MCA LAT 2018":roll = "KH SC LEMCA180";
-                switch (name)
-                {
-                    case "ambily" : course = "Computer Graphics";
-                        break;
-                    case "deepa" : course = "Soft Computing";
-                        break;
-                    case "soumya" : course = "Artificial Intelligence";
-                        break;
-                    default :
-                        builder.setMessage("PLEASE CHOOSE A BATCH WHERE YOU TEACH.")
-                                .setCancelable(false)
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        Intent StartMain=new Intent(getApplicationContext(),ChooseAttendanceDetails.class);
-                                        startActivity(StartMain);
-                                        finish();
-                                    }
-                                });
-                        AlertDialog alert = builder.create();
-                        alert.show();
-                }
-            break;
-        }
+
+        /*
         usref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -293,14 +292,37 @@ public class AddAttendance extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(AddAttendance.this, "Database Error!", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
         //DocumentReference docRef = db.collection("courses").document()
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for(i= 0; i<studno+1;i++)
+    }
+
+    public void onSubmit(View view)
+    {
+        for (int i = 1; i < 15; i++)
+        {
+            String name = "t" + i;
+            String sname = "s" + i;
+            int sid = getResources().getIdentifier(sname, "id", getPackageName());
+            int id = getResources().getIdentifier(name, "id", getPackageName());
+            if (id != 0)
+            {
+                TextView textView = (TextView) findViewById(id);
+                Switch aswitch = (Switch) findViewById(sid);
+                if (aswitch.isChecked())
                 {
-                    if(i==1||i==2||i==3||i==4||i==5||i==6||i==7||i==8||i==9)
+                    Toast.makeText(this, "PRESENT", Toast.LENGTH_SHORT).show();
+                }
+                else if(!aswitch.isChecked())
+                {
+                    Toast.makeText(AddAttendance.this, String.valueOf(textView.getText()), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+}
+
+
+/*  if(i==1||i==2||i==3||i==4||i==5||i==6||i==7||i==8||i==9)
                     {
                         rno = (roll+0+i);
                         Toast.makeText(AddAttendance.this, rno, Toast.LENGTH_SHORT).show();
@@ -310,11 +332,6 @@ public class AddAttendance extends AppCompatActivity {
                         Toast.makeText(AddAttendance.this, rno, Toast.LENGTH_SHORT).show();
                     }
                     DatabaseReference atref = database.getReference("Attendance");
-                    atref.child(batch).child(rno).child("status").setValue(1);
-                }
-            }
-        });
-*/
-    }
-}
+                    atref.child(batch).child(rno).child("status").setValue(1);*/
+
 

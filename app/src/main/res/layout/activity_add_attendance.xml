@@ -39,7 +39,6 @@
              android:id="@+id/t1"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:text="KHSCI5MCA16053"
              android:textAllCaps="true"
              android:textSize="22sp"
              android:textStyle="bold"
@@ -67,7 +66,6 @@
              android:id="@+id/t2"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:text="KHSCI5MCA16053"
              android:textAllCaps="true"
              android:textSize="22sp"
              android:textStyle="bold"
@@ -95,7 +93,6 @@
              android:id="@+id/t3"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:text="KHSCI5MCA16053"
              android:textAllCaps="true"
              android:textSize="22sp"
              android:textStyle="bold"
@@ -112,12 +109,455 @@
              android:theme="@style/MySwitch"
              android:visibility="invisible"/>
       </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_margin="10dp">
+
+         <TextView
+             android:id="@+id/t4"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textAllCaps="true"
+             android:textSize="22sp"
+             android:textStyle="bold"
+             android:textColor="@color/black_overlay"
+             android:visibility="invisible"/>
+
+         <Switch
+             android:id="@+id/s4"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:paddingStart="50dp"
+             android:paddingEnd="10dp"
+             android:theme="@style/MySwitch"
+             android:visibility="invisible"/>
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_margin="10dp">
+
+         <TextView
+             android:id="@+id/t5"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textAllCaps="true"
+             android:textSize="22sp"
+             android:textStyle="bold"
+             android:textColor="@color/black_overlay"
+             android:visibility="invisible"/>
+
+         <Switch
+             android:id="@+id/s5"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:paddingStart="50dp"
+             android:paddingEnd="10dp"
+             android:theme="@style/MySwitch"
+             android:visibility="invisible"/>
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_margin="10dp">
+
+         <TextView
+             android:id="@+id/t6"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textAllCaps="true"
+             android:textSize="22sp"
+             android:textStyle="bold"
+             android:textColor="@color/black_overlay"
+             android:visibility="invisible"/>
+
+         <Switch
+             android:id="@+id/s6"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:paddingStart="50dp"
+             android:paddingEnd="10dp"
+             android:theme="@style/MySwitch"
+             android:visibility="invisible"/>
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_margin="10dp">
+
+         <TextView
+             android:id="@+id/t7"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textAllCaps="true"
+             android:textSize="22sp"
+             android:textStyle="bold"
+             android:textColor="@color/black_overlay"
+             android:visibility="invisible"/>
+
+         <Switch
+             android:id="@+id/s7"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:paddingStart="50dp"
+             android:paddingEnd="10dp"
+             android:theme="@style/MySwitch"
+             android:visibility="invisible"/>
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_margin="10dp">
+
+         <TextView
+             android:id="@+id/t8"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textAllCaps="true"
+             android:textSize="22sp"
+             android:textStyle="bold"
+             android:textColor="@color/black_overlay"
+             android:visibility="invisible"/>
+
+         <Switch
+             android:id="@+id/s8"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:paddingStart="50dp"
+             android:paddingEnd="10dp"
+             android:theme="@style/MySwitch"
+             android:visibility="invisible"/>
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_margin="10dp">
+
+         <TextView
+             android:id="@+id/t9"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textAllCaps="true"
+             android:textSize="22sp"
+             android:textStyle="bold"
+             android:textColor="@color/black_overlay"
+             android:visibility="invisible"/>
+
+         <Switch
+             android:id="@+id/s9"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:paddingStart="50dp"
+             android:paddingEnd="10dp"
+             android:theme="@style/MySwitch"
+             android:visibility="invisible"/>
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_margin="10dp">
+
+         <TextView
+             android:id="@+id/t10"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textAllCaps="true"
+             android:textSize="22sp"
+             android:textStyle="bold"
+             android:textColor="@color/black_overlay"
+             android:visibility="invisible"/>
+
+         <Switch
+             android:id="@+id/s10"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:paddingStart="50dp"
+             android:paddingEnd="10dp"
+             android:theme="@style/MySwitch"
+             android:visibility="invisible"/>
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_margin="10dp">
+
+         <TextView
+             android:id="@+id/t11"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textAllCaps="true"
+             android:textSize="22sp"
+             android:textStyle="bold"
+             android:textColor="@color/black_overlay"
+             android:visibility="invisible"/>
+
+         <Switch
+             android:id="@+id/s11"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:paddingStart="50dp"
+             android:paddingEnd="10dp"
+             android:theme="@style/MySwitch"
+             android:visibility="invisible"/>
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_margin="10dp">
+
+         <TextView
+             android:id="@+id/t12"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textAllCaps="true"
+             android:textSize="22sp"
+             android:textStyle="bold"
+             android:textColor="@color/black_overlay"
+             android:visibility="invisible"/>
+
+         <Switch
+             android:id="@+id/s12"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:paddingStart="50dp"
+             android:paddingEnd="10dp"
+             android:theme="@style/MySwitch"
+             android:visibility="invisible"/>
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_margin="10dp">
+
+         <TextView
+             android:id="@+id/t13"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textAllCaps="true"
+             android:textSize="22sp"
+             android:textStyle="bold"
+             android:textColor="@color/black_overlay"
+             android:visibility="invisible"/>
+
+         <Switch
+             android:id="@+id/s13"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:paddingStart="50dp"
+             android:paddingEnd="10dp"
+             android:theme="@style/MySwitch"
+             android:visibility="invisible"/>
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_margin="10dp">
+
+         <TextView
+             android:id="@+id/t14"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textAllCaps="true"
+             android:textSize="22sp"
+             android:textStyle="bold"
+             android:textColor="@color/black_overlay"
+             android:visibility="invisible"/>
+
+         <Switch
+             android:id="@+id/s14"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:paddingStart="50dp"
+             android:paddingEnd="10dp"
+             android:theme="@style/MySwitch"
+             android:visibility="invisible"/>
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_margin="10dp">
+
+         <TextView
+             android:id="@+id/t15"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textAllCaps="true"
+             android:textSize="22sp"
+             android:textStyle="bold"
+             android:textColor="@color/black_overlay"
+             android:visibility="invisible"/>
+
+         <Switch
+             android:id="@+id/s15"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:paddingStart="50dp"
+             android:paddingEnd="10dp"
+             android:theme="@style/MySwitch"
+             android:visibility="invisible"/>
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_margin="10dp">
+
+         <TextView
+             android:id="@+id/t16"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textAllCaps="true"
+             android:textSize="22sp"
+             android:textStyle="bold"
+             android:textColor="@color/black_overlay"
+             android:visibility="invisible"/>
+
+         <Switch
+             android:id="@+id/s16"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:paddingStart="50dp"
+             android:paddingEnd="10dp"
+             android:theme="@style/MySwitch"
+             android:visibility="invisible"/>
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_margin="10dp">
+
+         <TextView
+             android:id="@+id/t17"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textAllCaps="true"
+             android:textSize="22sp"
+             android:textStyle="bold"
+             android:textColor="@color/black_overlay"
+             android:visibility="invisible"/>
+
+         <Switch
+             android:id="@+id/s17"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:paddingStart="50dp"
+             android:paddingEnd="10dp"
+             android:theme="@style/MySwitch"
+             android:visibility="invisible"/>
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_margin="10dp">
+
+         <TextView
+             android:id="@+id/t18"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textAllCaps="true"
+             android:textSize="22sp"
+             android:textStyle="bold"
+             android:textColor="@color/black_overlay"
+             android:visibility="invisible"/>
+
+         <Switch
+             android:id="@+id/s18"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:paddingStart="50dp"
+             android:paddingEnd="10dp"
+             android:theme="@style/MySwitch"
+             android:visibility="invisible"/>
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_margin="10dp">
+
+         <TextView
+             android:id="@+id/t19"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textAllCaps="true"
+             android:textSize="22sp"
+             android:textStyle="bold"
+             android:textColor="@color/black_overlay"
+             android:visibility="invisible"/>
+
+         <Switch
+             android:id="@+id/s19"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:paddingStart="50dp"
+             android:paddingEnd="10dp"
+             android:theme="@style/MySwitch"
+             android:visibility="invisible"/>
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_margin="10dp">
+
+         <TextView
+             android:id="@+id/t20"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textAllCaps="true"
+             android:textSize="22sp"
+             android:textStyle="bold"
+             android:textColor="@color/black_overlay"
+             android:visibility="invisible"/>
+
+         <Switch
+             android:id="@+id/s20"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:paddingStart="50dp"
+             android:paddingEnd="10dp"
+             android:theme="@style/MySwitch"
+             android:visibility="invisible"/>
+      </LinearLayout>
 <Button
     android:id="@+id/submit"
     android:layout_width="200dp"
     android:layout_height="wrap_content"
     android:textColor="@color/white"
     android:background="@color/colorPrimary"
+    android:onClick="onSubmit"
     android:text="@string/mark_attendance"/>
 
    </LinearLayout>
