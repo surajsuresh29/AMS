@@ -2,6 +2,7 @@ package com.bosscorp.ams;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import org.w3c.dom.Text;
 
 public class FacultyLogin extends AppCompatActivity {
 
+    boolean exit = false;
     FirebaseFirestore db;
     EditText username, password;
     Button login;
@@ -97,5 +99,25 @@ public class FacultyLogin extends AppCompatActivity {
                 }
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+
+
+        if (exit) {
+            System.exit(0);
+        } else {
+            Toast.makeText(this, "PRESS AGAIN TO EXIT",
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
+        }
+
     }
 }

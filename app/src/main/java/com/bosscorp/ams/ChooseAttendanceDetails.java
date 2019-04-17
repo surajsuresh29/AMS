@@ -1,10 +1,13 @@
 package com.bosscorp.ams;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,6 +15,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -24,12 +28,16 @@ public class ChooseAttendanceDetails extends AppCompatActivity {
     Button addattendance;
     String course, Date;
     Integer start, end;
+    EditText date_text;
+    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_attendance_details);
         addattendance = findViewById(R.id.attendance);
+        date_text = findViewById(R.id.Date);
+        builder = new AlertDialog.Builder(this);
         Spinner dropdown = findViewById(R.id.course);
         String[] items = new String[]{"Int MCA 2015", "Int MCA 2016", "Int MCA 2017", "Int MCA 2018", "MCA LAT 2017", "MCA LAT 2018"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -110,15 +118,34 @@ public class ChooseAttendanceDetails extends AppCompatActivity {
         addattendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), AddAttendance.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("COURSE", course);
-                bundle.putString("DATE", Date);
-                bundle.putInt("Start", start);
-                bundle.putInt("End", end);
-                i.putExtras(bundle);
-                startActivity(i);
+                if(TextUtils.isEmpty(date_text.getText()))
+                {
+                    builder.setMessage("Please choose a date to add attendance.")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
+                else
+                {
+                    Intent i = new Intent(getApplicationContext(), AddAttendance.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("COURSE", course);
+                    bundle.putString("DATE", Date);
+                    bundle.putInt("Start", start);
+                    bundle.putInt("End", end);
+                    i.putExtras(bundle);
+                    startActivity(i);
+                }
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(getApplicationContext(),FacultyDashboard.class);
+        startActivity(i);
     }
 }

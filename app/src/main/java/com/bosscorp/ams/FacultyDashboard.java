@@ -26,6 +26,7 @@ public class FacultyDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(),ChooseAttendanceDetails.class);
                 startActivity(i);
+                finish();
             }
         });
         add_student.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +34,7 @@ public class FacultyDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(),AddStudent.class);
                 startActivity(i);
+                finish();
             }
         });
         view_report.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +42,7 @@ public class FacultyDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(),ChooseAttendanceDetails.class);
                 startActivity(i);
+                finish();
             }
         });
     }

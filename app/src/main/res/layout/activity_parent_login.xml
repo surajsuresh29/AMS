@@ -49,22 +49,9 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/user"
                     android:drawableTint="@color/colorPrimary"
-                    android:hint="@string/registration_number"
+                    android:hint="@string/register_no"
+                    android:maxLength="14"
                     android:inputType="textCapCharacters"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Spinner
-                    android:id="@+id/course"
-                    android:layout_width="fill_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/spinner_bg"
-                    android:spinnerMode="dropdown"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
@@ -86,13 +73,13 @@
             </android.support.design.widget.TextInputLayout>
 
             <CheckBox
+                android:id="@+id/rememberme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:paddingTop="5dp"
                 android:text="@string/remember_me"
                 android:textColor="@color/black_overlay"/>
-
 
             <Button
                 android:id="@+id/login"
@@ -110,6 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="5dp"
+                android:visibility="invisible"
                 android:text="@string/forgot_password" />
         </LinearLayout>
     </RelativeLayout>

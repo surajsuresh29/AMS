@@ -24,21 +24,33 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class AddAttendance extends AppCompatActivity {
 
-
-    String course, roll, name, batch;
-    Integer rno;
+    String course, roll, name, batch, date, Contact, hour;
+    Integer rno,start,end,strength;
     ProgressDialog prg;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
     SharedPreferences tn;
     AlertDialog.Builder builder;
-    Button submitbtn;
+    private OkHttpClient mClient = new OkHttpClient();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Bundle bundle = getIntent().getExtras();
         batch = bundle.getString("COURSE");
-       // submitbtn = findViewById(R.id.submit);
+        date = bundle.getString("DATE");
+        start = bundle.getInt("Start");
+        end = bundle.getInt("End");
         prg = new ProgressDialog(AddAttendance.this);
         prg.setMessage("TAKE A DEEP BREATH..!!");
         builder = new AlertDialog.Builder(this);
@@ -46,7 +58,8 @@ public class AddAttendance extends AppCompatActivity {
         name = tn.getString("name", "");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_attendance);
-        prg.show();
+        date = date.replaceAll("/","-");
+        Toast.makeText(this, date, Toast.LENGTH_SHORT).show();
         switch (batch) {
             case "Int MCA 2015":
                 roll = "KHSCI5MCA";
@@ -211,29 +224,27 @@ public class AddAttendance extends AppCompatActivity {
                 }
                 break;
         }
-        prg.hide();
-        for (int i = 1; i < 15; i++) {
-            String name = "t" + i;
-            String sname = "s" + i;
-            int sid = getResources().getIdentifier(sname, "id", getPackageName());
-            int id = getResources().getIdentifier(name, "id", getPackageName());
-            if (id != 0) {
-                TextView textView = (TextView) findViewById(id);
-                Switch aswitch = (Switch) findViewById(sid);
-                aswitch.setVisibility(View.VISIBLE);
-                textView.setText(roll + (rno + i));
-                textView.setVisibility(View.VISIBLE);
-            }
-        }
 
-       /* usref.addValueEventListener(new ValueEventListener() {
+        DatabaseReference ref = database.getReference("Strength").child(batch).child("studno");
+        prg.show();
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
-                {
-                    String sq = dataSnapshot1.getKey();
-                    Toast.makeText(AddAttendance.this, sq, Toast.LENGTH_SHORT).show();
+                strength = dataSnapshot.getValue(Integer.class);
+                for (int i = 1; i < strength; i++) {
+                    String name = "t" + i;
+                    String sname = "s" + i;
+                    int sid = getResources().getIdentifier(sname, "id", getPackageName());
+                    int id = getResources().getIdentifier(name, "id", getPackageName());
+                    if (id != 0) {
+                        TextView textView = (TextView) findViewById(id);
+                        Switch aswitch = (Switch) findViewById(sid);
+                        aswitch.setVisibility(View.VISIBLE);
+                        textView.setText(roll + (rno + i));
+                        textView.setVisibility(View.VISIBLE);
+                    }
                 }
+                prg.hide();
             }
 
             @Override
@@ -241,97 +252,82 @@ public class AddAttendance extends AppCompatActivity {
 
             }
         });
-*/
-
-        /*
-        usref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                studno  = Integer.valueOf(String.valueOf(snapshot.getValue()));
-                LinearLayout lm = (LinearLayout) findViewById(R.id.parent_linear_layout);
-
-                for(i  =1; i<studno+1; i++ )
-                {
-                        LinearLayout ll = new LinearLayout(getApplicationContext());
-                        ll.setOrientation(LinearLayout.HORIZONTAL);
-                        // Create TextView
-                        TextView rollno = new TextView(getApplicationContext());
-                        if(i==1||i==2||i==3||i==4||i==5||i==6||i==7||i==8||i==9)
-                        {
-                            rollno.setText(roll+0+i);
-                        }
-                        else {
-                            rollno.setText(roll+i);
-                        }
-                        rollno.setPadding(50,70,0,0);
-                        rollno.setId(i);
-                        rollno.setTextColor(getColor(R.color.colorPrimary));
-                        rollno.setTextSize(20);
-                        ll.addView(rollno);
-
-                        // Create Switch
-                        Switch aSwitch = new Switch(getApplicationContext());
-                        aSwitch.setPadding(150,70,0,0);
-                        aSwitch.setChecked(true);
-                        ll.addView(aSwitch);
-                        lm.addView(ll);
-                }
-                LinearLayout ln = new LinearLayout(getApplicationContext());
-                ln.setGravity(50);
-                ln.setPadding(0,70,0,0);
-                submit.setText(R.string.mark_attendance);
-                submit.setLayoutParams (new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                submit.setBackgroundColor(getColor(R.color.colorPrimary));
-                submit.setTextColor(getColor(R.color.white));
-                ln.addView(submit);
-                lm.addView(ln);
-                prg.hide();
-                }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(AddAttendance.this, "Database Error!", Toast.LENGTH_SHORT).show();
-            }
-        });*/
-        //DocumentReference docRef = db.collection("courses").document()
     }
 
     public void onSubmit(View view)
     {
-        for (int i = 1; i < 15; i++)
+        for (int j=start; j<end+1 ;j++)
         {
-            String name = "t" + i;
-            String sname = "s" + i;
-            int sid = getResources().getIdentifier(sname, "id", getPackageName());
-            int id = getResources().getIdentifier(name, "id", getPackageName());
-            if (id != 0)
+            hour = String.valueOf(j);
+            for (int i = 1; i < strength; i++)
             {
-                TextView textView = (TextView) findViewById(id);
-                Switch aswitch = (Switch) findViewById(sid);
-                if (aswitch.isChecked())
+                String name = "t" + i;
+                String sname = "s" + i;
+                int sid = getResources().getIdentifier(sname, "id", getPackageName());
+                int id = getResources().getIdentifier(name, "id", getPackageName());
+                if (id != 0)
                 {
-                    Toast.makeText(this, "PRESENT", Toast.LENGTH_SHORT).show();
-                }
-                else if(!aswitch.isChecked())
-                {
-                    Toast.makeText(AddAttendance.this, String.valueOf(textView.getText()), Toast.LENGTH_SHORT).show();
+                    final  TextView textView = (TextView) findViewById(id);
+                    Switch aswitch = (Switch) findViewById(sid);
+                    if (aswitch.isChecked())
+                    {
+                        DatabaseReference dbref = database.getReference("Students").child(batch).child(String.valueOf(textView.getText())).child(date).child(hour).child(course);
+                        dbref.setValue(1);
+                    }
+                    else if(!aswitch.isChecked())
+                    {
+                        DatabaseReference dbref = database.getReference("Students").child(batch).child(String.valueOf(textView.getText())).child(date).child(hour).child(course);
+                        dbref.setValue(0);
+                        DatabaseReference dref = database.getReference("Students").child(batch).child(String.valueOf(textView.getText())).child("Contact");
+                        dref.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                Contact = dataSnapshot.getValue(String.class);
+                                try {
+                                    post("https://ams-asas.herokuapp.com/sms", new  Callback(){
+
+                                        @Override
+                                        public void onFailure(Call call, IOException e) {
+                                            e.printStackTrace();
+                                            Toast.makeText(AddAttendance.this, "failed", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        @Override
+                                        public void onResponse(Call call, Response response) throws IOException {
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Toast.makeText(getApplicationContext(),"SMS Sent!",Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        }
+                                    });
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
                 }
             }
         }
     }
+    Call post(String url, Callback callback) throws IOException{
+        RequestBody formBody = new FormBody.Builder()
+                .add("To", Contact)
+                .add("Body", "Your ward is absent today.")
+                .build();
+        Request request = new Request.Builder()
+                .url(url)
+                .post(formBody)
+                .build();
+        Call response = mClient.newCall(request);
+        response.enqueue(callback);
+        return response;
+    }
 }
-
-
-/*  if(i==1||i==2||i==3||i==4||i==5||i==6||i==7||i==8||i==9)
-                    {
-                        rno = (roll+0+i);
-                        Toast.makeText(AddAttendance.this, rno, Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        rno = (roll+i);
-                        Toast.makeText(AddAttendance.this, rno, Toast.LENGTH_SHORT).show();
-                    }
-                    DatabaseReference atref = database.getReference("Attendance");
-                    atref.child(batch).child(rno).child("status").setValue(1);*/
-
-

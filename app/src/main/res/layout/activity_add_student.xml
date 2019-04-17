@@ -40,9 +40,8 @@
                 android:drawableTint="@color/colorPrimary"
                 android:gravity="center"
                 android:hint="@string/register_no"
-                android:textAllCaps="true"
                 android:maxLength="14"
-                android:inputType="textPersonName"
+                android:inputType="textCapCharacters"
                 android:textAlignment="center" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
