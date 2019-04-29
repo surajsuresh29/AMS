@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bosscorp.ams.ParentDashboard"
+    tools:context="com.bosscorp.ams.FacultyDashboard"
     android:orientation="vertical"
     android:padding="10dp"
     android:background="#fcfcfc"
-    android:gravity="center"
-    android:id="@+id/ll">
+    android:gravity="center">
     <LinearLayout
         android:clipToPadding="false"
         android:gravity="center"

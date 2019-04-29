@@ -4,10 +4,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Handler;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,15 +32,14 @@ public class AddStudent extends AppCompatActivity {
     String  name, batch;
     AlertDialog.Builder builder,alertDialogBuilder;
     SharedPreferences tn,rm,sp;
-    boolean exit = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_student);
         setTitle("ADD STUDENT");
-        final EditText regno = (EditText)findViewById(R.id.regno);
-        final EditText contact = (EditText)findViewById(R.id.contact);
-        final Button add = (Button)findViewById(R.id.add);
+        final EditText regno = findViewById(R.id.regno);
+        final EditText contact = findViewById(R.id.contact);
+        final Button add = findViewById(R.id.add);
         tn = getApplicationContext().getSharedPreferences("faculty", MODE_PRIVATE);
         rm = getApplicationContext().getSharedPreferences("remember",MODE_PRIVATE);
         sp = getApplicationContext().getSharedPreferences("choice",MODE_PRIVATE);
@@ -209,6 +207,39 @@ public class AddStudent extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
 
                         add.setClickable(false);
+                        switch (batch)
+                        {
+                            case "Int MCA 2015":
+                                dbref.child(batch).child(regno.getText().toString()).child("Data Mining").child("attended").setValue(0);
+                                dbref.child(batch).child(regno.getText().toString()).child("Web Designing").child("attended").setValue(0);
+                                dbref.child(batch).child(regno.getText().toString()).child("Cryptography").child("attended").setValue(0);
+                                break;
+                            case "Int MCA 2016":
+                                dbref.child(batch).child(regno.getText().toString()).child("Computer Graphics").child("attended").setValue(0);
+                                dbref.child(batch).child(regno.getText().toString()).child("Soft Computing").child("attended").setValue(0);
+                                dbref.child(batch).child(regno.getText().toString()).child("Artificial Intelligence").child("attended").setValue(0);
+                                break;
+                            case "Int MCA 2017":
+                                dbref.child(batch).child(regno.getText().toString()).child("Data Structures").child("attended").setValue(0);
+                                dbref.child(batch).child(regno.getText().toString()).child("DBMS").child("attended").setValue(0);
+                                dbref.child(batch).child(regno.getText().toString()).child("Network Security").child("attended").setValue(0);
+                                break;
+                            case "Int MCA 2018":
+                                dbref.child(batch).child(regno.getText().toString()).child("COSA").child("attended").setValue(0);
+                                dbref.child(batch).child(regno.getText().toString()).child("Software Engineering").child("attended").setValue(0);
+                                dbref.child(batch).child(regno.getText().toString()).child("Machine Learning").child("attended").setValue(0);
+                                break;
+                            case "MCA LAT 2017":
+                                dbref.child(batch).child(regno.getText().toString()).child("JAVA").child("attended").setValue(0);
+                                dbref.child(batch).child(regno.getText().toString()).child("Networks").child("attended").setValue(0);
+                                dbref.child(batch).child(regno.getText().toString()).child("Discrete Mathematics").child("attended").setValue(0);
+                                break;
+                            case "MCA LAT 2018":
+                                dbref.child(batch).child(regno.getText().toString()).child("Computer Graphics").child("attended").setValue(0);
+                                dbref.child(batch).child(regno.getText().toString()).child("Soft Computing").child("attended").setValue(0);
+                                dbref.child(batch).child(regno.getText().toString()).child("Artificial Intelligence").child("attended").setValue(0);
+                                break;
+                        }
                         dbref.child(batch).child(regno.getText().toString()).child("Password").setValue("password");
                         dbref.child(batch).child(regno.getText().toString()).child("Ppassword").setValue("password");
                         dbref.child(batch).child(regno.getText().toString()).child("Contact").setValue("+91"+contact.getText().toString());
@@ -231,11 +262,11 @@ public class AddStudent extends AppCompatActivity {
     public void onBackPressed() {
         Intent i = new Intent(getApplicationContext(),FacultyDashboard.class);
         startActivity(i);
+        finish();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.exit, menu);
         return true;
     }
@@ -254,7 +285,6 @@ public class AddStudent extends AppCompatActivity {
                     })
                     .setNegativeButton("No", null)
                     .show();
-
         }
         else if(id == R.id.action_logout)
         {
@@ -266,13 +296,12 @@ public class AddStudent extends AppCompatActivity {
                             rm.edit().putString("rem", "no").apply();
                             Intent i = new Intent(getApplicationContext(),FacultyLogin.class);
                             startActivity(i);
+                            finish();
                         }
                     })
                     .setNegativeButton("No", null)
                     .show();
-
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

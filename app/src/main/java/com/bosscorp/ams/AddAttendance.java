@@ -5,14 +5,12 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +20,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
 
@@ -37,10 +34,10 @@ import okhttp3.Response;
 public class AddAttendance extends AppCompatActivity {
 
     String course, roll, name, batch, date, Contact, hour;
-    Integer rno,start,end,strength;
+    Integer rno,start,end,strength,attended,total,absent=0;
     ProgressDialog prg;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    SharedPreferences tn;
+    SharedPreferences tn,rm;
     AlertDialog.Builder builder;
     private OkHttpClient mClient = new OkHttpClient();
 
@@ -54,6 +51,7 @@ public class AddAttendance extends AppCompatActivity {
         prg = new ProgressDialog(AddAttendance.this);
         prg.setMessage("TAKE A DEEP BREATH..!!");
         builder = new AlertDialog.Builder(this);
+        rm = getApplicationContext().getSharedPreferences("remember",MODE_PRIVATE);
         tn = getApplicationContext().getSharedPreferences("faculty", MODE_PRIVATE);
         name = tn.getString("name", "");
         super.onCreate(savedInstanceState);
@@ -95,7 +93,7 @@ public class AddAttendance extends AppCompatActivity {
                     case "leena":
                         course = "Computer Graphics";
                         break;
-                    case "deepa":
+                    case "prasannakumar":
                         course = "Soft Computing";
                         break;
                     case "soumya":
@@ -119,7 +117,7 @@ public class AddAttendance extends AppCompatActivity {
                 roll = "KHSCI5MCA";
                 rno = 17000;
                 switch (name) {
-                    case "nandakumar":
+                    case "anisha":
                         course = "Data Structures";
                         break;
                     case "rajalakshmi":
@@ -146,7 +144,7 @@ public class AddAttendance extends AppCompatActivity {
                 roll = "KHSCI5MCA";
                 rno = 18000;
                 switch (name) {
-                    case "prasannakumar":
+                    case "deepa":
                         course = "COSA";
                         break;
                     case "uma":
@@ -173,7 +171,7 @@ public class AddAttendance extends AppCompatActivity {
                 roll = "KHSCLEMCA";
                 rno = 17000;
                 switch (name) {
-                    case "anisha":
+                    case "soumya":
                         course = "JAVA";
                         break;
                     case "ambily":
@@ -206,7 +204,7 @@ public class AddAttendance extends AppCompatActivity {
                     case "deepa":
                         course = "Soft Computing";
                         break;
-                    case "soumya":
+                    case "nandakumar":
                         course = "Artificial Intelligence";
                         break;
                     default:
@@ -226,25 +224,23 @@ public class AddAttendance extends AppCompatActivity {
         }
 
         DatabaseReference ref = database.getReference("Strength").child(batch).child("studno");
-        prg.show();
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 strength = dataSnapshot.getValue(Integer.class);
-                for (int i = 1; i < strength; i++) {
+                for (int i = 1; i < strength+1; i++) {
                     String name = "t" + i;
                     String sname = "s" + i;
                     int sid = getResources().getIdentifier(sname, "id", getPackageName());
                     int id = getResources().getIdentifier(name, "id", getPackageName());
                     if (id != 0) {
-                        TextView textView = (TextView) findViewById(id);
-                        Switch aswitch = (Switch) findViewById(sid);
+                        TextView textView = findViewById(id);
+                        Switch aswitch = findViewById(sid);
                         aswitch.setVisibility(View.VISIBLE);
                         textView.setText(roll + (rno + i));
                         textView.setVisibility(View.VISIBLE);
                     }
                 }
-                prg.hide();
             }
 
             @Override
@@ -253,13 +249,58 @@ public class AddAttendance extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(getApplicationContext(),FacultyDashboard.class);
+        startActivity(i);
+        finish();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.exit, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_exit) {
 
+            new AlertDialog.Builder(this)
+                    .setMessage("Are you sure you want to exit?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        }
+        else if(id == R.id.action_logout)
+        {
+            new AlertDialog.Builder(this)
+                    .setMessage("Are you sure you want to Logout?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            rm.edit().putString("rem", "no").apply();
+                            Intent i = new Intent(getApplicationContext(),FacultyLogin.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
     public void onSubmit(View view)
     {
+
         for (int j=start; j<end+1 ;j++)
         {
             hour = String.valueOf(j);
-            for (int i = 1; i < strength; i++)
+            for (int i = 1; i < strength+1; i++)
             {
                 String name = "t" + i;
                 String sname = "s" + i;
@@ -267,22 +308,35 @@ public class AddAttendance extends AppCompatActivity {
                 int id = getResources().getIdentifier(name, "id", getPackageName());
                 if (id != 0)
                 {
-                    final  TextView textView = (TextView) findViewById(id);
-                    Switch aswitch = (Switch) findViewById(sid);
+                    final  TextView textView = findViewById(id);
+                    Switch aswitch = findViewById(sid);
                     if (aswitch.isChecked())
                     {
-                        DatabaseReference dbref = database.getReference("Students").child(batch).child(String.valueOf(textView.getText())).child(date).child(hour).child(course);
+                        final DatabaseReference dbref = database.getReference("Students").child(batch).child(String.valueOf(textView.getText())).child(date).child(hour).child(course);
                         dbref.setValue(1);
+                        final DatabaseReference aref = database.getReference("Students").child(batch).child(String.valueOf(textView.getText())).child(course).child("attended");
+                        aref.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                attended = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
+                                aref.setValue(attended+1);
+
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
                     }
                     else if(!aswitch.isChecked())
                     {
-                        DatabaseReference dbref = database.getReference("Students").child(batch).child(String.valueOf(textView.getText())).child(date).child(hour).child(course);
-                        dbref.setValue(0);
+                        absent+=1;
                         DatabaseReference dref = database.getReference("Students").child(batch).child(String.valueOf(textView.getText())).child("Contact");
-                        dref.addListenerForSingleValueEvent(new ValueEventListener() {
+                        dref.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 Contact = dataSnapshot.getValue(String.class);
+                                Toast.makeText(AddAttendance.this, Contact, Toast.LENGTH_SHORT).show();
                                 try {
                                     post("https://ams-asas.herokuapp.com/sms", new  Callback(){
 
@@ -293,7 +347,7 @@ public class AddAttendance extends AppCompatActivity {
                                         }
 
                                         @Override
-                                        public void onResponse(Call call, Response response) throws IOException {
+                                        public void onResponse(Call call, Response response) {
                                             runOnUiThread(new Runnable() {
                                                 @Override
                                                 public void run() {
@@ -312,15 +366,41 @@ public class AddAttendance extends AppCompatActivity {
 
                             }
                         });
+                        DatabaseReference dbref = database.getReference("Students").child(batch).child(String.valueOf(textView.getText())).child(date).child(hour).child(course);
+                        dbref.setValue(0);
                     }
                 }
             }
         }
+        final DatabaseReference abref = database.getReference("Students").child(batch).child(course).child("total");
+        abref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                total = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
+                abref.setValue(total+1);
+                builder.setTitle("Report");
+                builder.setMessage("Attendance marked successfully."+"\n\nTOTAL STRENGTH : "+strength+"\n\nABSENTEES : "+absent)
+                        .setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent i = new Intent(getApplicationContext(),FacultyDashboard.class);
+                                startActivity(i);
+                                finish();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
     Call post(String url, Callback callback) throws IOException{
         RequestBody formBody = new FormBody.Builder()
                 .add("To", Contact)
-                .add("Body", "Your ward is absent today.")
+                .add("Body", "Your ward is absent from the "+course+" lecture on "+date+".")
                 .build();
         Request request = new Request.Builder()
                 .url(url)

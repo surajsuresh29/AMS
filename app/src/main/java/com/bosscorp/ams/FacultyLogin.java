@@ -1,11 +1,12 @@
 package com.bosscorp.ams;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -19,8 +20,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import org.w3c.dom.Text;
-
 public class FacultyLogin extends AppCompatActivity {
 
     boolean exit = false;
@@ -29,7 +28,7 @@ public class FacultyLogin extends AppCompatActivity {
     Button login;
     CheckBox rem;
     SharedPreferences rm,tn;
-
+    ProgressDialog prg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +40,12 @@ public class FacultyLogin extends AppCompatActivity {
         rem = findViewById(R.id.rememberme);
         rm = getApplicationContext().getSharedPreferences("remember",MODE_PRIVATE);
         tn = getApplicationContext().getSharedPreferences("faculty",MODE_PRIVATE);
+        prg = new ProgressDialog(FacultyLogin.this);
+        prg.setMessage("Take a deep breath..!");
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                prg.show();
                 if(TextUtils.isEmpty(username.getText()))
                 {
                     username.setError("Please enter your User ID.");
@@ -82,7 +84,11 @@ public class FacultyLogin extends AppCompatActivity {
                         {
                             tn.edit().putString("name", username.getText().toString()).apply();
                             Intent startdash = new Intent(getApplicationContext(),FacultyDashboard.class);
+                            Bundle b = new Bundle();
+                            b.putString("name",username.getText().toString());
+                            startdash.putExtras(b);
                             startActivity(startdash);
+                            prg.hide();
                             Toast.makeText(FacultyLogin.this, "Successfully logged in.",
                                     Toast.LENGTH_SHORT).show();
                             finish();

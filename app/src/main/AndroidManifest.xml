@@ -13,9 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity
-            android:name=".AddStudent" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".CoordinatorReport" />
+        <activity android:name=".ChooseBatch" />
+        <activity android:name=".TeacherAttendanceReport" />
+        <activity android:name=".StudentAttendanceReport" />
+        <activity android:name=".AttendanceReport" />
+        <activity android:name=".AddStudent" />
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
@@ -26,11 +30,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ChooseAttendanceDetails"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".ChooseAttendanceDetails" />
         <activity
-            android:name=".AddAttendance"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".AddAttendance" />
         <activity
             android:name=".ChooseAccount"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -44,14 +46,11 @@
             android:name=".FacultyLogin"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".FacultyDashboard"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".FacultyDashboard" />
         <activity
-            android:name=".StudentDashboard"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".StudentDashboard" />
         <activity
-            android:name=".ParentDashboard"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".ParentDashboard" />
     </application>
 
 </manifest>

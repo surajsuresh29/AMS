@@ -21,7 +21,7 @@
 
         <RadioButton
             android:id="@+id/radioFaculty"
-            android:layout_width="175dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/radio_faculty"
             android:textColor="@color/colorPrimary"
@@ -30,7 +30,7 @@
 
         <RadioButton
             android:id="@+id/radioParent"
-            android:layout_width="175dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/radio_parent"
             android:textColor="@color/colorPrimary"
@@ -39,7 +39,7 @@
 
         <RadioButton
             android:id="@+id/radioStudent"
-            android:layout_width="175dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/radio_student"
             android:textColor="@color/colorPrimary"
@@ -53,12 +53,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:background="@color/colorPrimary"
         android:gravity="center"
         android:text="@string/button_continue"
         android:textAlignment="center"
         android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/radioGroup2"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="@+id/radioGroup2"

@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">AMS</string>
     <string name="institute_name">AMRITA SCHOOL OF ARTS AND SCIENCES</string>
-    <string name="radio_student">I am a Student</string>
-    <string name="radio_faculty">I am a Faculty</string>
-    <string name="radio_parent">I am a Parent</string>
+    <string name="radio_student">STUDENT</string>
+    <string name="radio_faculty">FACULTY</string>
+    <string name="radio_parent">PARENT</string>
     <string name="button_continue">CONTINUE</string>
     <string name="faculty">Faculty</string>
     <string name="student">Student</string>
@@ -22,17 +22,14 @@
     <string name="status_leave">CHECK STATUS</string>
     <string name="hint_npassword">New Password</string>
     <string name="hint_cpassword">Confirm Password</string>
-    <string name="date">CHOOSE DATE</string>
+    <string name="date">MARK DATE</string>
     <string name="title_activity_fullscreen">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="remember_me">Remember Me</string>
     <string name="to">TO</string>
     <string name="mark_attendance">MARK ATTENDANCE</string>
     <string name="add_daily_attendance">Add daily attendance of students</string>
     <string name="leave_requests">VIEW LEAVE REQUESTS</string>
     <string name="check_leave_requests_from_students">Check leave requests from students</string>
-    <string name="attendance_report">ATTENDANCE REPORT</string>
     <string name="check_attendance_report">Check attendance report of students</string>
     <string name="add_student">ADD STUDENT</string>
     <string name="add_stud_description">Add a new student to the class</string>
@@ -45,5 +42,13 @@
     <string name="register_no">REGISTER NUMBER.</string>
     <string name="name_hint">STUDENT\'S NAME</string>
     <string name="parent_s">PARENT\'S CONTACT No.</string>
+    <string name="attendance_report">ATTENDANCE REPORT</string>
+    <string name="check_your_ward_s_attendance_percentage">Check your Ward\'s Attendance percentage</string>
+    <string name="int_mca_2015">Int MCA 2015</string>
+    <string name="int_mca_2016">Int MCA 2016</string>
+    <string name="int_mca_2017">Int MCA 2017</string>
+    <string name="int_mca_2018">Int MCA 2018</string>
+    <string name="mca_lat_2017">MCA LAT 2017</string>
+    <string name="mca_lat_2018">MCA LAT 2018</string>
 
 </resources>

@@ -2,31 +2,21 @@ package com.bosscorp.ams;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;;import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 public class ParentLogin extends AppCompatActivity {
 
@@ -35,7 +25,7 @@ public class ParentLogin extends AppCompatActivity {
     Button login;
     String batch,uname,pword;
     CheckBox rem;
-    SharedPreferences rm;
+    SharedPreferences rm,sroll,sbatch;
     //String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
     @Override
@@ -47,6 +37,8 @@ public class ParentLogin extends AppCompatActivity {
         login = findViewById(R.id.login);
         rem = findViewById(R.id.rememberme);
         rm = getApplicationContext().getSharedPreferences("remember",MODE_PRIVATE);
+        sroll = getApplicationContext().getSharedPreferences("roll",MODE_PRIVATE);
+        sbatch = getApplicationContext().getSharedPreferences("batch",MODE_PRIVATE);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,15 +100,18 @@ public class ParentLogin extends AppCompatActivity {
                 String pass = dataSnapshot.getValue(String.class);
                 if (pass.equals(pword))
                 {
+                    sroll.edit().putString("ROLL", uname).apply();
+                    sbatch.edit().putString("BATCH",batch).apply();
                     Toast.makeText(ParentLogin.this, "Successfully logged in.",
                             Toast.LENGTH_LONG).show();
-                    Intent dash = new Intent(getApplicationContext(), StudentDashboard.class);
+                    Intent dash = new Intent(getApplicationContext(), ParentDashboard.class);
                     startActivity(dash);
                     finish();
                 }
                 else {
                     Toast.makeText(ParentLogin.this, "Please check your login credentials.",
                             Toast.LENGTH_LONG).show();
+                    login.setClickable(true);
                 }
             }
             @Override

@@ -1,32 +1,24 @@
 package com.bosscorp.ams;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;;import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 public class StudentLogin extends AppCompatActivity {
 
@@ -35,7 +27,9 @@ public class StudentLogin extends AppCompatActivity {
     Button login;
     String batch,uname,pword;
     CheckBox rem;
-    SharedPreferences rm;
+    SharedPreferences rm,sroll,sbatch;
+    boolean exit=false;
+    ProgressDialog prg;
     //String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
     @Override
@@ -47,9 +41,14 @@ public class StudentLogin extends AppCompatActivity {
         login = findViewById(R.id.login);
         rem = findViewById(R.id.rememberme);
         rm = getApplicationContext().getSharedPreferences("remember",MODE_PRIVATE);
+        sroll = getApplicationContext().getSharedPreferences("roll",MODE_PRIVATE);
+        sbatch = getApplicationContext().getSharedPreferences("batch",MODE_PRIVATE);
+        prg = new ProgressDialog(StudentLogin.this);
+        prg.setMessage("Take a deep breath..!");
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                prg.show();
                 login.setClickable(false);
                 if(TextUtils.isEmpty(username.getText()))
                 {
@@ -109,9 +108,12 @@ public class StudentLogin extends AppCompatActivity {
                 String pass = dataSnapshot.getValue(String.class);
                 if (pass.equals(pword))
                 {
+                    sroll.edit().putString("ROLL", uname).apply();
+                    sbatch.edit().putString("BATCH",batch).apply();
                     Toast.makeText(StudentLogin.this, "Successfully logged in.",
                             Toast.LENGTH_LONG).show();
                     Intent dash = new Intent(getApplicationContext(), StudentDashboard.class);
+                    prg.hide();
                     startActivity(dash);
                     finish();
                 }
@@ -126,6 +128,26 @@ public class StudentLogin extends AppCompatActivity {
 
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+
+
+        if (exit) {
+            System.exit(0);
+        } else {
+            Toast.makeText(this, "PRESS AGAIN TO EXIT",
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
+        }
+
     }
 }
 /*      DocumentReference docRef = db.collection("courses").document(String.valueOf(course))
