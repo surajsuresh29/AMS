@@ -57,11 +57,9 @@ public class FacultyLogin extends AppCompatActivity {
                 else {
                     if (rem.isChecked()) {
                         rm.edit().putString("rem", "yes").apply();
-                        login.setClickable(false);
                         Login(v);
                     }
                     else {
-                        login.setClickable(false);
                         Login(v);
                     }
                 }
@@ -93,10 +91,18 @@ public class FacultyLogin extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             finish();
                         }
+                        else {
+                            Toast.makeText(FacultyLogin.this, "Please check your login credentials.",
+                                    Toast.LENGTH_SHORT).show();
+                            prg.hide();
+
+                        }
                     }
                     else {
                         Toast.makeText(FacultyLogin.this, "Please check your login credentials.",
                                 Toast.LENGTH_SHORT).show();
+                        prg.hide();
+
                     }
                 }
                 else {

@@ -32,6 +32,7 @@ public class AddStudent extends AppCompatActivity {
     String  name, batch;
     AlertDialog.Builder builder,alertDialogBuilder;
     SharedPreferences tn,rm,sp;
+    Integer strength;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -205,8 +206,19 @@ public class AddStudent extends AppCompatActivity {
                 alertDialogBuilder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-
                         add.setClickable(false);
+                        final DatabaseReference abref = database.getReference("Strength").child(batch).child("studno");
+                        abref.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                strength = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
+                                abref.setValue(strength+1);
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
                         switch (batch)
                         {
                             case "Int MCA 2015":

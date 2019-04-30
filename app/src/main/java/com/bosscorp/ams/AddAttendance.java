@@ -58,6 +58,7 @@ public class AddAttendance extends AppCompatActivity {
         setContentView(R.layout.activity_add_attendance);
         date = date.replaceAll("/","-");
         Toast.makeText(this, date, Toast.LENGTH_SHORT).show();
+        prg.show();
         switch (batch) {
             case "Int MCA 2015":
                 roll = "KHSCI5MCA";
@@ -241,6 +242,7 @@ public class AddAttendance extends AppCompatActivity {
                         textView.setVisibility(View.VISIBLE);
                     }
                 }
+                prg.hide();
             }
 
             @Override
@@ -336,7 +338,7 @@ public class AddAttendance extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 Contact = dataSnapshot.getValue(String.class);
-                                Toast.makeText(AddAttendance.this, Contact, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(AddAttendance.this, Contact, Toast.LENGTH_SHORT).show();
                                 try {
                                     post("https://ams-asas.herokuapp.com/sms", new  Callback(){
 
